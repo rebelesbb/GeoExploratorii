@@ -1,0 +1,268 @@
+[gd_scene load_steps=13 format=3 uid="uid://brksnq0r0lk2d"]
+
+[ext_resource type="Script" uid="uid://cdsr2jsaxr5cf" path="res://scripts/quiz_page.gd" id="1_puuyo"]
+[ext_resource type="Texture2D" uid="uid://ddrw72dfil2n5" path="res://assets/images/answ_bg_red.png" id="2_s03yw"]
+[ext_resource type="Texture2D" uid="uid://d11p3x5r8sc28" path="res://assets/images/answ_bg_orange.png" id="3_ltliw"]
+[ext_resource type="Texture2D" uid="uid://dx6ew0erlqyjs" path="res://assets/images/answ_bg_blue.png" id="4_1l753"]
+[ext_resource type="Texture2D" uid="uid://c0ll2rvtae6if" path="res://assets/images/answ_bg_yellow.png" id="5_2uaje"]
+[ext_resource type="Texture2D" uid="uid://cbtstov3sa7mh" path="res://assets/images/check_button.png" id="6_5dte4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s03yw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ltliw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1l753"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2uaje"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5dte4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_estm6"]
+
+[node name="QuizPage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_puuyo")
+
+[node name="BackgroundPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="LevelTitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Helloo"
+horizontal_alignment = 1
+
+[node name="QuestionPanel" type="Panel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_s03yw")
+
+[node name="QuestionLabel" type="Label" parent="MarginContainer/VBoxContainer/QuestionPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 83.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Helloo"
+horizontal_alignment = 1
+
+[node name="QuestionTypeRoot" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SingleChoiceContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/QuestionTypeRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.45700002
+anchor_right = 1.0
+anchor_bottom = 1.136
+offset_left = -428.40002
+offset_top = -69.0
+offset_right = -99.0
+offset_bottom = 159.43199
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(567, 38.5)
+alignment = 1
+
+[node name="InstructionLabel" type="Label" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/SingleChoiceContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/SingleChoiceContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="AnswerButton0" type="Button" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/SingleChoiceContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ltliw")
+icon = ExtResource("3_ltliw")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="AnswerButton1" type="Button" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/SingleChoiceContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1l753")
+icon = ExtResource("2_s03yw")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="AnswerButton2" type="Button" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/SingleChoiceContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2uaje")
+icon = ExtResource("4_1l753")
+flat = true
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="AnswerButton3" type="Button" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/SingleChoiceContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5dte4")
+icon = ExtResource("5_2uaje")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="MultiChoiceContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/QuestionTypeRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -95.0
+offset_right = 2.0
+offset_bottom = 195.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="InstructionLabel" type="Label" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/MultiChoiceContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/MultiChoiceContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/h_separation = 150
+theme_override_constants/v_separation = 50
+columns = 2
+
+[node name="MultiCheck0" type="CheckBox" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/MultiChoiceContainer/VBoxContainer"]
+custom_minimum_size = Vector2(40, 50)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 40
+text = "answ1"
+flat = true
+icon_alignment = 1
+
+[node name="MultiCheck1" type="CheckBox" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/MultiChoiceContainer/VBoxContainer"]
+custom_minimum_size = Vector2(40, 50)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 40
+text = "answ2"
+flat = true
+
+[node name="MultiCheck2" type="CheckBox" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/MultiChoiceContainer/VBoxContainer"]
+custom_minimum_size = Vector2(40, 50)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 40
+text = "answ3"
+flat = true
+
+[node name="MultiCheck3" type="CheckBox" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/MultiChoiceContainer/VBoxContainer"]
+custom_minimum_size = Vector2(40, 50)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 40
+text = "answ4"
+
+[node name="CheckButton" type="Button" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/MultiChoiceContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxEmpty_estm6")
+icon = ExtResource("6_5dte4")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="TextAnswerContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/QuestionTypeRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -109.0
+offset_right = -2.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="InstructionLabel" type="Label" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/TextAnswerContainer"]
+layout_mode = 2
+
+[node name="TextLineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/TextAnswerContainer"]
+custom_minimum_size = Vector2(400, 20)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+placeholder_text = "Răspunsul tau ..."
+alignment = 1
+expand_to_text_length = true
+clear_button_enabled = true
+
+[node name="CheckButton" type="Button" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/TextAnswerContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+icon = ExtResource("6_5dte4")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="FeedbackLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 6
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
