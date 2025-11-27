@@ -24,6 +24,68 @@ offset_right = 2560.0
 offset_bottom = 1600.0
 scale = Vector2(0.499, 0.499)
 
+[node name="CityButtons" type="Control" parent="Control/NewMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ClujButton" type="Button" parent="Control/NewMap/CityButtons"]
+layout_mode = 0
+offset_left = 937.8758
+offset_top = 597.1944
+offset_right = 945.8758
+offset_bottom = 605.1944
+scale = Vector2(5.5691433, 4.2865705)
+flat = true
+
+[node name="TimisoaraButton" type="Button" parent="Control/NewMap/CityButtons"]
+layout_mode = 0
+offset_left = 529.05804
+offset_top = 901.8036
+offset_right = 537.05804
+offset_bottom = 909.8036
+scale = Vector2(6.531066, 5.0079975)
+flat = true
+
+[node name="BucurestiButton" type="Button" parent="Control/NewMap/CityButtons"]
+layout_mode = 0
+offset_left = 1486.9739
+offset_top = 1126.2524
+offset_right = 1494.9739
+offset_bottom = 1134.2524
+scale = Vector2(8.054106, 7.1723447)
+flat = true
+
+[node name="BrasovButton" type="Button" parent="Control/NewMap/CityButtons"]
+layout_mode = 0
+offset_left = 1326.6532
+offset_top = 865.7314
+offset_right = 1334.6532
+offset_bottom = 873.7314
+scale = Vector2(5.4088144, 5.008015)
+flat = true
+
+[node name="IasiButton" type="Button" parent="Control/NewMap/CityButtons"]
+layout_mode = 0
+offset_left = 1667.3346
+offset_top = 436.87375
+offset_right = 1675.3346
+offset_bottom = 444.87375
+scale = Vector2(5.4889774, 3.8857703)
+flat = true
+
+[node name="ConstantaButton" type="Button" parent="Control/NewMap/CityButtons"]
+layout_mode = 0
+offset_left = 1997.9961
+offset_top = 1138.2766
+offset_right = 2005.9961
+offset_bottom = 1146.2766
+scale = Vector2(5.3286586, 4.2865744)
+flat = true
+
 [node name="OldMap" type="TextureRect" parent="Control"]
 layout_mode = 1
 offset_right = 2560.0
@@ -88,3 +150,75 @@ offset_bottom = 562.0
 scale = Vector2(0.14869203, 0.16402352)
 icon = ExtResource("4_julsu")
 flat = true
+
+[node name="TimisoaraLabel" type="Label" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 241.0
+offset_top = 414.0
+offset_right = 332.0
+offset_bottom = 441.0
+theme_override_colors/font_color = Color(0.0011741425, 0.00027977204, 0.012617188, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 19
+text = "Timisoara"
+
+[node name="Cluj-Napoca" type="Label" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 416.0
+offset_top = 324.0
+offset_right = 527.0
+offset_bottom = 351.0
+theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 19
+text = "Cluj-Napoca"
+
+[node name="BucurestiLabel" type="Label" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 672.0
+offset_top = 524.0
+offset_right = 760.0
+offset_bottom = 551.0
+theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 19
+text = "Bucuresti"
+
+[node name="Brasovlabel" type="Label" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 594.0
+offset_top = 388.0
+offset_right = 657.0
+offset_bottom = 415.0
+theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 19
+text = "Brasov"
+
+[node name="IasiLabel" type="Label" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 770.0
+offset_top = 218.0
+offset_right = 810.0
+offset_bottom = 245.0
+theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 19
+text = "Iasi"
+
+[node name="ConstantaLbel" type="Label" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 889.0
+offset_top = 549.0
+offset_right = 983.0
+offset_bottom = 576.0
+theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 19
+text = "Constanta"
