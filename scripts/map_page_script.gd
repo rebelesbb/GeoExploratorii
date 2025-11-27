@@ -17,6 +17,8 @@ const MAP_TEXTURES := [
 	preload("res://assets/maps/harta_vecini.png"),
 	preload("res://assets/maps/harta_relief.png"),
 	preload("res://assets/maps/harta_ape.png"),
+	preload("res://assets/maps/harta_activitati.png"),
+	preload("res://assets/maps/harta_cluj.png")
 ]
 
 const QUIZ_SCENE_PATH      := "res://scenes/Quiz.tscn"
