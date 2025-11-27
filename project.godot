@@ -11,7 +11,12 @@ config_version=5
 [application]
 
 config/name="GeoExploratorii"
+run/main_scene="uid://d0yrx7lf7nofm"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+
+[autoload]
+
+Global="*res://scripts/Global.gd"
 
 [display]
 
