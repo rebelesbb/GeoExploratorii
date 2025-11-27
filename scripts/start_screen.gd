@@ -16,7 +16,7 @@ func _on_start_pressed():
 
 	Global.player_name = player_name
 #	aici trecem la Home page
-	get_tree().change_scene_to_file("res://scenes/Harta.tscn")
+	Transition.fade_to_scene("res://scenes/harta.tscn")
 
 func _on_quit_pressed():
-	get_tree().quit()
+	Transition.fade_and_quit()

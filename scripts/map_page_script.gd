@@ -21,10 +21,10 @@ const MAP_TEXTURES := [
 	preload("res://assets/maps/harta_cluj.png")
 ]
 
-const QUIZ_SCENE_PATH      := "res://scenes/Quiz.tscn"
-const SANCTUAR_SCENE_PATH  := "res://scenes/Sanctuar.tscn"
-const PUZZLE_SCENE_PATH    := "res://scenes/Puzzle.tscn"
-const INFO_SCENE_PATH      := "res://scenes/Info.tscn"
+const QUIZ_SCENE_PATH := "res://scenes/Quiz.tscn"
+const SANCTUAR_SCENE_PATH := "res://scenes/Sanctuar.tscn"
+const PUZZLE_SCENE_PATH := "res://scenes/Puzzle.tscn"
+const INFO_SCENE_PATH := "res://scenes/Info.tscn"
 
 var last_level: int = 0
 
@@ -49,16 +49,13 @@ func _set_initial_map() -> void:
 func update_map_with_fade() -> void:
 	var new_level: int = clamp(Global.current_level, 0, MAP_TEXTURES.size() - 1)
 
-	# dacă e primul nivel sau nu s-a schimbat nivelul, doar punem textura direct
 	if new_level == last_level:
 		new_map.texture = MAP_TEXTURES[new_level]
 		return
-
-	# setăm texturile
+		
 	old_map.texture = MAP_TEXTURES[last_level]
 	new_map.texture = MAP_TEXTURES[new_level]
 
-	# resetăm alpha: vechea hartă 100%, noua 0%
 	old_map.modulate.a = 1.0
 	new_map.modulate.a = 0.0
 

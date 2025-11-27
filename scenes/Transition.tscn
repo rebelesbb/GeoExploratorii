@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmyblhbdi22sm"]
+
+[ext_resource type="Script" uid="uid://msh7x70qxe4f" path="res://scripts/transition.gd" id="1_fyjtc"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_fyjtc")
+
+[node name="Overlay" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1280.0
+offset_bottom = 800.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
