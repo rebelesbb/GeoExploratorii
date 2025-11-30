@@ -18,6 +18,7 @@ texture = ExtResource("2_wjoiy")
 [node name="Animal" parent="." instance=ExtResource("3_p30xp")]
 position = Vector2(228, 141)
 size = 0.7
+use_saved_position = false
 
 [node name="Label" type="Label" parent="."]
 offset_left = 201.0

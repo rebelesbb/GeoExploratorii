@@ -15,6 +15,8 @@ extends Node2D
 			sprite.scale = Vector2(size, size)
 			
 @export var animal_id: String = ""   # ID unic pentru fiecare animal
+@export var use_saved_position: bool = true 
+
 const SAVE_PATH := "user://sanctuar_positions.cfg"
 
 var dragging := false
@@ -34,7 +36,7 @@ func _ready() -> void:
 	sprite.scale = Vector2(size, size)
 
 	# dacă suntem în joc (nu în editor), încearcă să încarci poziția salvată
-	if not Engine.is_editor_hint():
+	if not Engine.is_editor_hint() and use_saved_position:
 		_load_saved_position()
 
 
