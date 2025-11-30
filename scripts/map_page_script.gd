@@ -35,7 +35,7 @@ const MAP_TEXTURES := [
 const ACTIVITIES_MAP_LEVEL := 4
 const CLUJ_MAP_LEVEL := 5
 
-const QUIZ_SCENE_PATH := "res://scenes/Quiz.tscn"
+const QUIZ_SCENE_PATH := "res://scenes/QuizPage.tscn"
 const SANCTUAR_SCENE_PATH := "res://scenes/Sanctuar.tscn"
 const PUZZLE_SCENE_PATH := "res://scenes/Puzzle.tscn"
 const INFO_SCENE_PATH := "res://scenes/Info.tscn"
@@ -141,7 +141,7 @@ func _on_play_button_pressed() -> void:
 	Global.current_level += 1
 	print(Global.current_level)
 	update_map_with_fade()
-	get_tree().change_scene_to_file(QUIZ_SCENE_PATH)
+	Transition.fade_to_scene(QUIZ_SCENE_PATH)
 
 func _on_sanctuar_button_pressed() -> void:
 	get_tree().change_scene_to_file(SANCTUAR_SCENE_PATH)

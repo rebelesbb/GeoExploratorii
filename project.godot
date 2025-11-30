@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GeoExploratorii"
-run/main_scene="uid://bx7sorjmcqkn5"
+run/main_scene="uid://p1o0o3mnriq8"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 

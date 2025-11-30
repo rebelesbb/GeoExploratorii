@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://gyb4xkpneis6"]
+[gd_scene load_steps=8 format=3 uid="uid://l0hjl8nmcka"]
 
 [ext_resource type="Script" uid="uid://dj5tfpy2dshsn" path="res://scripts/map_page_script.gd" id="1_cq5r0"]
 [ext_resource type="Texture2D" uid="uid://cs6b01xeouj1t" path="res://assets/maps/harta_muta.png" id="2_julsu"]

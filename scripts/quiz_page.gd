@@ -64,7 +64,8 @@ var style_text := Color("df7c99ff")
 
 func _ready():
 	quiz_data_resource = QuizDataResource.new()
-	
+	current_chapter_id = max(1, Global.current_level)
+
 	# --- CALCUL SCOR MAXIM 100 ---
 	# Calculăm câte întrebări sunt în tot jocul
 	var total_questions_in_game = max_chapters * QUESTIONS_PER_LEVEL
@@ -261,11 +262,15 @@ func _end_level_check():
 	
 	await get_tree().create_timer(1.5).timeout
 	
-	if current_chapter_id < max_chapters:
-		current_chapter_id += 1
-		_start_level(current_chapter_id)
+	#Global.current_level += 1
+
+	# dacă mai sunt nivele → revine la hartă
+	if Global.current_level < max_chapters:
+		
+		Transition.fade_to_scene("res://scenes/harta.tscn")
 	else:
 		_end_game_final()
+
 
 func _end_game_final():
 	single_container.visible = false
