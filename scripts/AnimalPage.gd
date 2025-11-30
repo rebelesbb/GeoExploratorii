@@ -8,7 +8,7 @@ extends Node2D
 
 
 func _ready() -> void:
-	label.text = "Felicitări!\n" + animal_name + " a fost învinsă!"
+	label.text = "Felicitări!\n" + animal_name + " este acum in inventar!"
 
 
 

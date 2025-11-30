@@ -5,9 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://bqaexj33unqtw" path="res://scenes/animals/Urs.tscn" id="3_p30xp"]
 [ext_resource type="Texture2D" uid="uid://pf8njyrywjul" path="res://assets/sanctuarButton.png" id="4_5ch0a"]
 
-[node name="CaprioaraPage" type="Node2D"]
+[node name="UrsPage" type="Node2D"]
 script = ExtResource("1_p30xp")
-animal_name = "caprioara"
+animal_name = "ursul"
+unlock_level = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(639.5, 400)

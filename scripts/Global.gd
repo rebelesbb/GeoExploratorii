@@ -1,3 +1,3 @@
 extends Node
 
-var sanctuary_level: int = 4
+var sanctuary_level: int = 7
