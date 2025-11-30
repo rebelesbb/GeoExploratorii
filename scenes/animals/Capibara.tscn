@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c44455nki6aqd"]
+
+[ext_resource type="PackedScene" uid="uid://dpjccshikuhvr" path="res://scenes/animals/Animal.tscn" id="1_2i4lf"]
+[ext_resource type="Texture2D" uid="uid://byyuav48fohmc" path="res://assets/capibara.png" id="2_vlic2"]
+[ext_resource type="Script" uid="uid://boyjxg7v2mhe" path="res://scripts/Animal.gd" id="3_uxar2"]
+
+[node name="Animal" instance=ExtResource("1_2i4lf")]
+script = ExtResource("3_uxar2")
+required_level = 7
+animal_id = "capibara"
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(598, 351)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_vlic2")

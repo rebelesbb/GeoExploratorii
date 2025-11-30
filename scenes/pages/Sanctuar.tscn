@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=3 uid="uid://cngti2n2tvtot"]
+
+[ext_resource type="Texture2D" uid="uid://6kk287a4846e" path="res://assets/Sanctuar.png" id="1_5uv5j"]
+[ext_resource type="Script" uid="uid://cba1pxwnaluua" path="res://scripts/Sanctuar.gd" id="1_bgujd"]
+[ext_resource type="PackedScene" uid="uid://r784waivigg1" path="res://scenes/animals/Caprioara.tscn" id="2_pm4g2"]
+[ext_resource type="PackedScene" uid="uid://bqaexj33unqtw" path="res://scenes/animals/Urs.tscn" id="3_7bvye"]
+[ext_resource type="PackedScene" uid="uid://gop1g1u7t3wm" path="res://scenes/animals/Lup.tscn" id="4_fqpbo"]
+[ext_resource type="PackedScene" uid="uid://dt4j6dpeihibk" path="res://scenes/animals/Rata.tscn" id="5_wrya4"]
+[ext_resource type="PackedScene" uid="uid://b4vrlnl1gdf5h" path="res://scenes/animals/Oaie.tscn" id="6_85pqk"]
+[ext_resource type="PackedScene" uid="uid://duovinj08e3s7" path="res://scenes/animals/Castor.tscn" id="7_lahe8"]
+[ext_resource type="PackedScene" uid="uid://c44455nki6aqd" path="res://scenes/animals/Capibara.tscn" id="8_lahe8"]
+[ext_resource type="Texture2D" uid="uid://bwh2ug7adfewr" path="res://assets/SchimbaSanctuarul.png" id="10_bgujd"]
+
+[node name="Sanctuar" type="Node2D"]
+script = ExtResource("1_bgujd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(641.1544, 401.53848)
+scale = Vector2(0.8357364, 0.789964)
+texture = ExtResource("1_5uv5j")
+
+[node name="Animal" parent="." instance=ExtResource("2_pm4g2")]
+position = Vector2(-495, 172)
+size = 0.5
+
+[node name="Animal2" parent="." instance=ExtResource("3_7bvye")]
+position = Vector2(-89, 93)
+size = 0.6
+
+[node name="Animal3" parent="." instance=ExtResource("5_wrya4")]
+position = Vector2(-233, 299)
+
+[node name="Animal4" parent="." instance=ExtResource("4_fqpbo")]
+position = Vector2(342, 101)
+size = 0.45
+
+[node name="Animal5" parent="." instance=ExtResource("6_85pqk")]
+position = Vector2(255, 279)
+
+[node name="Animal6" parent="." instance=ExtResource("7_lahe8")]
+position = Vector2(559, 224)
+
+[node name="Animal7" parent="." instance=ExtResource("8_lahe8")]
+position = Vector2(35, 323)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 460.0
+offset_top = 29.000008
+offset_right = 1469.9999
+offset_bottom = 631.0
+scale = Vector2(0.4, 0.4)
+icon = ExtResource("10_bgujd")
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_ChangeBgButton_pressed"]

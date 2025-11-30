@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://gop1g1u7t3wm"]
+
+[ext_resource type="PackedScene" uid="uid://dpjccshikuhvr" path="res://scenes/animals/Animal.tscn" id="1_2s73i"]
+[ext_resource type="Script" uid="uid://boyjxg7v2mhe" path="res://scripts/Animal.gd" id="2_kscg4"]
+[ext_resource type="Texture2D" uid="uid://jnmbplql53qh" path="res://assets/lup.png" id="3_m6n0s"]
+
+[node name="Animal" instance=ExtResource("1_2s73i")]
+script = ExtResource("2_kscg4")
+required_level = 4
+animal_id = "lup"
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(634, 383)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_m6n0s")
