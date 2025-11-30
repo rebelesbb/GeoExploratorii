@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ce2eqwocvsrpg"]
+[gd_scene load_steps=6 format=3 uid="uid://ce2eqwocvsrpg"]
 
 [ext_resource type="Script" uid="uid://dmceksh1wbq02" path="res://scripts/AnimalPage.gd" id="1_kjj4v"]
 [ext_resource type="Texture2D" uid="uid://6kk287a4846e" path="res://assets/Sanctuar.png" id="2_ih1ii"]
 [ext_resource type="PackedScene" uid="uid://duovinj08e3s7" path="res://scenes/animals/Castor.tscn" id="3_kjj4v"]
 [ext_resource type="Texture2D" uid="uid://pf8njyrywjul" path="res://assets/sanctuarButton.png" id="4_eskib"]
+[ext_resource type="Texture2D" uid="uid://c8acjjul474lb" path="res://assets/home_page_button.png" id="5_ih1ii"]
 
 [node name="CastorPage" type="Node2D"]
 script = ExtResource("1_kjj4v")
@@ -39,4 +40,14 @@ scale = Vector2(0.15, 0.15)
 icon = ExtResource("4_eskib")
 flat = true
 
+[node name="HomeButton" type="Button" parent="."]
+offset_left = 28.0
+offset_top = 25.0
+offset_right = 139.0
+offset_bottom = 142.0
+icon = ExtResource("5_ih1ii")
+flat = true
+expand_icon = true
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HomeButton" to="." method="_on_HomeButton_pressed"]

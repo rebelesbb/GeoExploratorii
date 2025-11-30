@@ -196,7 +196,7 @@ func _handle_answer_result(is_correct: bool):
 	_update_statistics(is_correct)
 	
 	if is_correct:
-		feedback_label.text = "Corect! 🎉"
+		#feedback_label.text = "Corect! 🎉"
 		
 		if is_repeating_phase:
 			repeat_queue.pop_front()
@@ -218,7 +218,7 @@ func _handle_answer_result(is_correct: bool):
 					await get_tree().create_timer(1.0).timeout
 					_load_question(0)
 	else:
-		feedback_label.text = "Greșit. Întrebarea va reveni."
+		#feedback_label.text = "Greșit. Întrebarea va reveni."
 		
 		if not repeat_queue.has(current_question_data):
 			repeat_queue.append(current_question_data)
@@ -258,19 +258,23 @@ func _update_statistics(is_correct: bool):
 	print("Score: ", round(game_stats["total_score"]), " | Q: ", q_id, " Attempts: ", stats["attempts"])
 
 func _end_level_check():
-	feedback_label.text = "Nivelul " + str(current_chapter_id) + " Complet! 🏆"
+	var animal_scene = Global.animal_scenes.get(current_chapter_id, "")
+	#feedback_label.text = "Nivelul " + str(current_chapter_id) + " Complet! 🏆"
 	
 	await get_tree().create_timer(1.5).timeout
 	
 	#Global.current_level += 1
+	# Marchează nivelul curent ca finalizat
+	if not Global.completed_levels.has(current_chapter_id):
+		Global.completed_levels.append(current_chapter_id)
+
+	
 
 	# dacă mai sunt nivele → revine la hartă
 	if Global.current_level < max_chapters:
-		
-		Transition.fade_to_scene("res://scenes/harta.tscn")
+		Transition.fade_to_scene(animal_scene)
 	else:
 		_end_game_final()
-
 
 func _end_game_final():
 	single_container.visible = false

@@ -11,6 +11,8 @@ func _ready() -> void:
 	label.text = "Felicitări!\n" + animal_name + " este acum in sanctuar!"
 
 
+func _on_HomeButton_pressed():
+	Transition.fade_to_scene("res://scenes/harta.tscn")
 
 func _on_button_pressed() -> void:
 	Global.sanctuary_level = unlock_level

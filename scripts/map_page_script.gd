@@ -36,7 +36,7 @@ const ACTIVITIES_MAP_LEVEL := 4
 const CLUJ_MAP_LEVEL := 5
 
 const QUIZ_SCENE_PATH := "res://scenes/QuizPage.tscn"
-const SANCTUAR_SCENE_PATH := "res://scenes/Sanctuar.tscn"
+const SANCTUAR_SCENE_PATH := "res://scenes/pages/Sanctuar.tscn"
 const PUZZLE_SCENE_PATH := "res://scenes/Puzzle.tscn"
 const INFO_SCENE_PATH := "res://scenes/Info.tscn"
 

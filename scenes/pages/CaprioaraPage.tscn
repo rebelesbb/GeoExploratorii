@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0yrx7lf7nofm"]
+[gd_scene load_steps=6 format=3 uid="uid://d0yrx7lf7nofm"]
 
 [ext_resource type="Texture2D" uid="uid://6kk287a4846e" path="res://assets/Sanctuar.png" id="1_u1te1"]
 [ext_resource type="Script" uid="uid://dmceksh1wbq02" path="res://scripts/AnimalPage.gd" id="1_yhq64"]
 [ext_resource type="PackedScene" uid="uid://r784waivigg1" path="res://scenes/animals/Caprioara.tscn" id="2_yhq64"]
 [ext_resource type="Texture2D" uid="uid://pf8njyrywjul" path="res://assets/sanctuarButton.png" id="3_0y1fu"]
+[ext_resource type="Texture2D" uid="uid://c8acjjul474lb" path="res://assets/home_page_button.png" id="5_0y1fu"]
 
 [node name="CaprioaraPage" type="Node2D"]
 script = ExtResource("1_yhq64")
@@ -38,4 +39,14 @@ scale = Vector2(0.15, 0.15)
 icon = ExtResource("3_0y1fu")
 flat = true
 
+[node name="HomeButton" type="Button" parent="."]
+offset_left = 28.0
+offset_top = 25.0
+offset_right = 139.0
+offset_bottom = 142.0
+icon = ExtResource("5_0y1fu")
+flat = true
+expand_icon = true
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HomeButton" to="." method="_on_HomeButton_pressed"]

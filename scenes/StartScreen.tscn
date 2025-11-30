@@ -60,8 +60,7 @@ alignment = 1
 
 [node name="NameInput" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 45
-placeholder_text = "Numele tau"
+theme_override_font_sizes/font_size = 35
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)

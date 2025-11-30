@@ -38,7 +38,8 @@ func _ready() -> void:
 	# dacă suntem în joc (nu în editor), încearcă să încarci poziția salvată
 	if not Engine.is_editor_hint() and use_saved_position:
 		_load_saved_position()
-
+		
+		
 
 func _load_saved_position() -> void:
 	if animal_id == "":
@@ -60,6 +61,8 @@ func _load_saved_position() -> void:
 func update_visibility_by_level(current_level: int) -> void:
 	visible = current_level >= required_level
 
+func _on_HomeButton_pressed():
+	Transition.fade_to_scene("res://scenes/harta.tscn")
 
 func _input(event: InputEvent) -> void:
 	# dacă nu e vizibil sau nu avem sprite, nu facem nimic

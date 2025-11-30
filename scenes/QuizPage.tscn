@@ -55,7 +55,7 @@ alignment = 1
 
 [node name="LevelTitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 32
 text = "Helloo"
 horizontal_alignment = 1
 
@@ -66,13 +66,19 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_s03yw")
 
 [node name="QuestionLabel" type="Label" parent="MarginContainer/VBoxContainer/QuestionPanel"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 83.0
+anchor_bottom = 1.0
+offset_left = 78.0
+offset_top = 2.0
+offset_right = -65.0
+offset_bottom = 2.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 50
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
 text = "Helloo"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="QuestionTypeRoot" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -225,13 +231,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = -109.0
-offset_right = -2.0
-offset_bottom = 76.0
+offset_left = 355.0
+offset_top = -219.0
+offset_right = -345.0
+offset_bottom = 162.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 100
+theme_override_constants/separation = 200
 alignment = 1
 
 [node name="InstructionLabel" type="Label" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/TextAnswerContainer"]
@@ -240,7 +246,7 @@ layout_mode = 2
 [node name="TextLineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/QuestionTypeRoot/TextAnswerContainer"]
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 2
 theme_override_font_sizes/font_size = 30
 placeholder_text = "Răspunsul tau ..."
 alignment = 1
