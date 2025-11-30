@@ -1,12 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c58k7lowh7kjt"]
+[gd_scene load_steps=3 format=3 uid="uid://c58k7lowh7kjt"]
 
-[ext_resource type="Texture2D" uid="uid://dfm3t82csuelo" path="res://assets/puzzle_piece.png" id="1_h2uw1"]
-[ext_resource type="Script" uid="uid://dfgo7f6m1asoj" path="res://scripts/confetti_script.gd" id="1_p43rg"]
+[ext_resource type="Script" uid="uid://bvcvs6udx8vaq" path="res://scripts/puzzle_piece_page.gd" id="1_qkne7"]
 [ext_resource type="Texture2D" uid="uid://enqwloo7slf5" path="res://assets/continue_button.png" id="2_qkne7"]
 
 [node name="PuzzlePiecePage" type="CanvasLayer"]
 follow_viewport_enabled = true
-script = ExtResource("1_p43rg")
+script = ExtResource("1_qkne7")
 
 [node name="Dimmer" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -16,45 +15,40 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.10980392, 0.23137255, 0.38039216, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="Dimmer"]
-layout_mode = 1
+[node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Dimmer/CenterContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Dimmer/CenterContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
 layout_mode = 2
-theme_override_constants/separation = 25
 alignment = 1
 
-[node name="CongratsLabel" type="Label" parent="Dimmer/CenterContainer/PanelContainer/VBoxContainer"]
+[node name="CongratsLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 37
 text = "Ai primit o nouă piesă din puzzle!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PuzzlePieceImage" type="TextureRect" parent="Dimmer/CenterContainer/PanelContainer/VBoxContainer"]
+[node name="PuzzlePieceImage" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("1_h2uw1")
 stretch_mode = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="Dimmer/CenterContainer/PanelContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
 
-[node name="NextQuestionButton" type="Button" parent="Dimmer/CenterContainer/PanelContainer/VBoxContainer/MarginContainer"]
+[node name="NextQuestionButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/PanelContainer"]
 custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 8
 icon = ExtResource("2_qkne7")
 flat = true
