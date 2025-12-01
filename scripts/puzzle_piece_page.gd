@@ -41,13 +41,10 @@ func display_puzzle_piece(chapter_id: int, question_id: int):
 	
 	var texture = load(file_path)
 	puzzle_image.texture = texture
+	
 
 func _ready():
 	display_confetti()
-	
-	var texture := load("res://assets/puzzle_pieces/Cap2/2.1.png")
-	puzzle_image.texture = texture
-	puzzle_image.size = Vector2(300, 300)
 
 func _on_next_question_button_pressed():
 	emit_signal("piece_displayed_and_closed")

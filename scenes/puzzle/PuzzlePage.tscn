@@ -1,0 +1,125 @@
+[gd_scene load_steps=9 format=3 uid="uid://dodr83lu8h2ue"]
+
+[ext_resource type="Script" uid="uid://hseqrpqd65jl" path="res://scripts/puzzle_page.gd" id="1_1a05n"]
+[ext_resource type="PackedScene" uid="uid://dgv4ti23y2lhc" path="res://scenes/puzzle/Piece1.tscn" id="2_iwbts"]
+[ext_resource type="PackedScene" uid="uid://c83pyaqdo8f64" path="res://scenes/puzzle/Piece2.tscn" id="3_5ldw8"]
+[ext_resource type="PackedScene" uid="uid://dehjx6yv2d0jy" path="res://scenes/puzzle/Piece3.tscn" id="4_bc2gx"]
+[ext_resource type="PackedScene" uid="uid://cyyfrd7iecgqs" path="res://scenes/puzzle/Piece4.tscn" id="5_7cfmi"]
+[ext_resource type="PackedScene" uid="uid://43vovtnm161n" path="res://scenes/puzzle/Piece5.tscn" id="6_g2ywq"]
+[ext_resource type="PackedScene" uid="uid://c73ricvnu7j22" path="res://scenes/puzzle/Piece6.tscn" id="7_joo86"]
+[ext_resource type="Texture2D" uid="uid://c8acjjul474lb" path="res://assets/home_page_button.png" id="8_iwbts"]
+
+[node name="PuzzlePage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1a05n")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101960786, 0.16862746, 0.29803923, 1)
+
+[node name="PuzzleContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Piece" parent="PuzzleContainer" instance=ExtResource("2_iwbts")]
+layout_mode = 0
+offset_left = 581.0
+offset_top = 97.0
+offset_right = 820.0
+offset_bottom = 456.0
+texture = null
+
+[node name="Piece2" parent="PuzzleContainer" instance=ExtResource("3_5ldw8")]
+layout_mode = 0
+offset_left = 762.0
+offset_top = 103.0
+offset_right = 1106.0
+offset_bottom = 534.0
+texture = null
+
+[node name="Piece3" parent="PuzzleContainer" instance=ExtResource("4_bc2gx")]
+layout_mode = 0
+offset_left = 1043.0
+offset_top = 92.0
+offset_right = 1284.0
+offset_bottom = 451.0
+
+[node name="Piece4" parent="PuzzleContainer" instance=ExtResource("5_7cfmi")]
+layout_mode = 0
+offset_left = 579.0
+offset_top = 367.0
+offset_right = 867.0
+offset_bottom = 802.0
+texture = null
+
+[node name="Piece5" parent="PuzzleContainer" instance=ExtResource("6_g2ywq")]
+layout_mode = 0
+offset_left = 801.0
+offset_top = 431.0
+offset_right = 1097.0
+offset_bottom = 794.0
+texture = null
+
+[node name="Piece6" parent="PuzzleContainer" instance=ExtResource("7_joo86")]
+layout_mode = 0
+offset_left = 1034.0
+offset_top = 357.0
+offset_right = 1275.0
+offset_bottom = 792.0
+texture = null
+
+[node name="CongratsLayer" type="CanvasLayer" parent="."]
+layer = 10
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CongratsLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="CongratsLabel" type="Label" parent="CongratsLayer/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -25.0
+offset_right = 96.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "FELICITARI!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HomeButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 25.0
+offset_right = 139.0
+offset_bottom = 142.0
+icon = ExtResource("8_iwbts")
+flat = true
+expand_icon = true
+
+[connection signal="pressed" from="HomeButton" to="." method="_on_home_button_pressed"]

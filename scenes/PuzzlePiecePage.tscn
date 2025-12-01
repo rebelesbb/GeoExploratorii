@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c58k7lowh7kjt"]
+[gd_scene load_steps=3 format=3 uid="uid://cw6iyrw40ac0s"]
 
 [ext_resource type="Script" uid="uid://bvcvs6udx8vaq" path="res://scripts/puzzle_piece_page.gd" id="1_qkne7"]
 [ext_resource type="Texture2D" uid="uid://enqwloo7slf5" path="res://assets/continue_button.png" id="2_qkne7"]
@@ -50,5 +50,7 @@ custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+action_mode = 0
 icon = ExtResource("2_qkne7")
-flat = true
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/PanelContainer/NextQuestionButton" to="." method="_on_next_question_button_pressed"]

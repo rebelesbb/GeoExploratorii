@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="GeoExploratorii"
-run/main_scene="uid://c58k7lowh7kjt"
+run/main_scene="uid://p1o0o3mnriq8"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://scripts/global.gd"
+Transition="*res://scenes/Transition.tscn"
 
 [display]
 
