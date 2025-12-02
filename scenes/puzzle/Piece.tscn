@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck05ca8vwqnta"]
+
+[ext_resource type="Script" uid="uid://df1yfyxfdebre" path="res://scripts/puzzle_piece_base.gd" id="1_pwmuf"]
+
+[node name="Piece" type="TextureRect"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_pwmuf")

@@ -2,26 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<<< HEAD:assets/Caprioara.png.import
-uid="uid://dbp6oobf7og1v"
-path="res://.godot/imported/Caprioara.png-bc75cfb9ea47ff76e5efc71bd0c2f2d0.ctex"
-========
-uid="uid://enqwloo7slf5"
+uid="uid://dfyifcxs82trm"
 path="res://.godot/imported/continue_button.png-d9bf158a5112629915b97252d1c7511b.ctex"
->>>>>>>> puzzle-piece-page:assets/continue_button.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:assets/Caprioara.png.import
-source_file="res://assets/Caprioara.png"
-dest_files=["res://.godot/imported/Caprioara.png-bc75cfb9ea47ff76e5efc71bd0c2f2d0.ctex"]
-========
 source_file="res://assets/continue_button.png"
 dest_files=["res://.godot/imported/continue_button.png-d9bf158a5112629915b97252d1c7511b.ctex"]
->>>>>>>> puzzle-piece-page:assets/continue_button.png.import
 
 [params]
 
