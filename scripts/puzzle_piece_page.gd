@@ -3,7 +3,7 @@ extends CanvasLayer
 signal piece_displayed_and_closed
 
 @onready var puzzle_image = $CenterContainer/PanelContainer/VBoxContainer/PuzzlePieceImage 
-@onready var next_button = $CenterContainer/PanelContainer/VBoxContainer/MarginContainer/NextQuestionButton
+@onready var next_button = $CenterContainer/PanelContainer/VBoxContainer/PanelContainer/NextQuestionButton
 
 func display_confetti():
 	var conffeti_textures = [
