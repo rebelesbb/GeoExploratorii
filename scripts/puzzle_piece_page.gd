@@ -37,6 +37,7 @@ func display_confetti():
 
 # funcite apelata din quiz_page.gd
 func display_puzzle_piece(chapter_id: int, question_id: int):
+	print("PuzzleImage found? ", puzzle_image)
 	var file_path = "res://assets/puzzle_pieces/Cap%d/%d.%d.png" % [chapter_id, chapter_id, question_id]
 	
 	var texture = load(file_path)

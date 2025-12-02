@@ -36,7 +36,7 @@ func _initialize_pieces():
 	var margin_x = PIECE_SIZE.x + 20
 	var margin_y = PIECE_SIZE.y + 20
 	
-	var chapter_id = Global.current_level + 1
+	var chapter_id = Global.current_level 
 	
 	for i in range(pieces.size()):
 		var p = pieces[i]
@@ -98,12 +98,15 @@ func display_confetti():
 func _on_puzzle_complete():
 	game_won = true
 	await get_tree().create_timer(0.5).timeout
-	
+	#
 	display_confetti()
-	congrats_layer.visible = true
+	#congrats_layer.visible = true
 	
-	await get_tree().create_timer(3.0).timeout
-	Transition.fade_to_scene(NEXT_SCENE_PATH)
+	await get_tree().create_timer(2.0).timeout
+	# după puzzle → dă animalul
+	var animal_scene = Global.animal_scenes.get(Global.current_level, "")
+	Transition.fade_to_scene(animal_scene)
+
 
 func get_all_pieces_reference():
 	return pieces

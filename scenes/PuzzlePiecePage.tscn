@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cw6iyrw40ac0s"]
 
 [ext_resource type="Script" uid="uid://bvcvs6udx8vaq" path="res://scripts/puzzle_piece_page.gd" id="1_qkne7"]
-[ext_resource type="Texture2D" uid="uid://enqwloo7slf5" path="res://assets/continue_button.png" id="2_qkne7"]
+[ext_resource type="Texture2D" uid="uid://dfyifcxs82trm" path="res://assets/continue_button.png" id="2_qkne7"]
 
 [node name="PuzzlePiecePage" type="CanvasLayer"]
 follow_viewport_enabled = true

@@ -2,6 +2,8 @@
 extends Control
 
 const QuizDataResource = preload("res://data/quiz_data.gd")
+const PuzzlePiecePage = preload("res://scenes/PuzzlePiecePage.tscn")
+
 
 const TYPE_MULTI = QuizDataResource.TYPE_MULTI
 const TYPE_SINGLE = QuizDataResource.TYPE_SINGLE
@@ -99,6 +101,9 @@ func _start_level(chapter_id: int):
 	# Extragem exact numărul definit de întrebări
 	selected_questions = pool.slice(0, QUESTIONS_PER_LEVEL)
 	
+	for i in range(selected_questions.size()):
+		selected_questions[i]["piece_number"] = i + 1
+		
 	print("--- ÎNCEPE CAPITOLUL ", chapter_id, " ---")
 	_load_question(0)
 
@@ -191,35 +196,57 @@ func _on_text_check_pressed():
 	_handle_answer_result(user_answer.to_lower() == correct_answer.to_lower())
 
 # ---------- LOGICA CENTRALĂ: RĂSPUNS & STATISTICI ----------
+func get_question_number(q_data: Dictionary) -> int:
+	# id-uri de forma "c1_q3"
+	var id = q_data.get("id", "")
+	
+	if id is String and id.contains("_q"):
+		var parts = id.split("_q")
+		if parts.size() == 2:
+			return int(parts[1])
+
+	# fallback (nu ar trebui să ajungem aici)
+	return 1
 
 func _handle_answer_result(is_correct: bool):
 	_update_statistics(is_correct)
 	
 	if is_correct:
 		#feedback_label.text = "Corect! 🎉"
+		var page := PuzzlePiecePage.instantiate()
+		add_child(page)
+		# trimitem chapter + id-ul întrebării
+		var question_number = current_question_data["piece_number"]
+		var cap = current_chapter_id
+		
+		print("CAPITOLUL:", cap)
+		print("Q_NR:", question_number)
+		page.display_puzzle_piece(cap, question_number)
+		# așteptăm apăsarea butonului "Continuă"
+		await page.piece_displayed_and_closed
 		
 		if is_repeating_phase:
 			repeat_queue.pop_front()
 			if repeat_queue.is_empty():
 				_end_level_check()
 			else:
-				await get_tree().create_timer(1.0).timeout
+				#await get_tree().create_timer(1.0).timeout
 				_load_question(0)
 		else:
 			current_question_index += 1
 			if current_question_index < selected_questions.size():
-				await get_tree().create_timer(1.0).timeout
+				#await get_tree().create_timer(1.0).timeout
 				_load_question(current_question_index)
 			else:
 				if repeat_queue.is_empty():
 					_end_level_check()
 				else:
 					is_repeating_phase = true
-					await get_tree().create_timer(1.0).timeout
+					#await get_tree().create_timer(1.0).timeout
 					_load_question(0)
 	else:
 		#feedback_label.text = "Greșit. Întrebarea va reveni."
-		
+	
 		if not repeat_queue.has(current_question_data):
 			repeat_queue.append(current_question_data)
 		
@@ -258,23 +285,27 @@ func _update_statistics(is_correct: bool):
 	print("Score: ", round(game_stats["total_score"]), " | Q: ", q_id, " Attempts: ", stats["attempts"])
 
 func _end_level_check():
-	var animal_scene = Global.animal_scenes.get(current_chapter_id, "")
+	# trimitem copilul să facă puzzle-ul
+	
+
+	#var animal_scene = Global.animal_scenes.get(current_chapter_id, "")
 	#feedback_label.text = "Nivelul " + str(current_chapter_id) + " Complet! 🏆"
 	
-	await get_tree().create_timer(1.5).timeout
+	#await get_tree().create_timer(1.5).timeout
 	
 	#Global.current_level += 1
 	# Marchează nivelul curent ca finalizat
+	Global.current_level = current_chapter_id 
 	if not Global.completed_levels.has(current_chapter_id):
 		Global.completed_levels.append(current_chapter_id)
 
-	
-
+	Transition.fade_to_scene("res://scenes/puzzle/PuzzlePage.tscn")
 	# dacă mai sunt nivele → revine la hartă
-	if Global.current_level < max_chapters:
-		Transition.fade_to_scene(animal_scene)
-	else:
-		_end_game_final()
+	#if Global.current_level < max_chapters:
+		##Transition.fade_to_scene(animal_scene)
+		#print("continua")
+	#else:
+		#_end_game_final()
 
 func _end_game_final():
 	single_container.visible = false
