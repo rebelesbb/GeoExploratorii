@@ -138,10 +138,6 @@ func _on_menu_button_pressed() -> void:
 	sidebar.visible = not sidebar.visible
 
 func _on_play_button_pressed() -> void:
-	if Global.current_level >= Global.sanctuary_level:
-		# Modifica logica pentru terminarea jocului
-		return
-	
 	Global.current_level += 1
 	print(Global.current_level)
 	update_map_with_fade()
