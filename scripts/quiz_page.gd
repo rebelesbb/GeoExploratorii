@@ -4,7 +4,6 @@ extends Control
 const QuizDataResource = preload("res://data/quiz_data.gd")
 const PuzzlePiecePage = preload("res://scenes/PuzzlePiecePage.tscn")
 
-
 const TYPE_MULTI = QuizDataResource.TYPE_MULTI
 const TYPE_SINGLE = QuizDataResource.TYPE_SINGLE
 const TYPE_TEXT = QuizDataResource.TYPE_TEXT
@@ -35,14 +34,10 @@ const TYPE_TEXT = QuizDataResource.TYPE_TEXT
 @onready var text_line_edit = $MarginContainer/VBoxContainer/QuestionTypeRoot/TextAnswerContainer/TextLineEdit
 @onready var text_check_button = $MarginContainer/VBoxContainer/QuestionTypeRoot/TextAnswerContainer/CheckButton
 
-# --- VARIABILE PENTRU LOGICA PE CAPITOLE ȘI STATISTICI ---
-
 var quiz_data_resource : QuizData
 var current_chapter_id := 1
-# Acum sunt 7 capitole (1-6 + Cluj)
 var max_chapters := 7
 
-# Configurație întrebări per nivel
 const QUESTIONS_PER_LEVEL = 6 
 
 var selected_questions : Array
@@ -51,14 +46,7 @@ var current_question_index := 0
 var is_repeating_phase := false
 var current_question_data : Dictionary
 
-# Variabilă pentru a stoca valoarea unei singure întrebări
 var points_per_question : float = 0.0
-
-# Statistici
-var game_stats = {
-	"total_score": 0.0, 
-	"history": {}
-}
 
 var style_single := Color("5170ff")
 var style_multi := Color("ff914d")
@@ -68,11 +56,8 @@ func _ready():
 	quiz_data_resource = QuizDataResource.new()
 	current_chapter_id = max(1, Global.current_level)
 
-	# --- CALCUL SCOR MAXIM 100 ---
-	# Calculăm câte întrebări sunt în tot jocul
 	var total_questions_in_game = max_chapters * QUESTIONS_PER_LEVEL
 	
-	# Împărțim 100 la numărul total de întrebări
 	if total_questions_in_game > 0:
 		points_per_question = 100.0 / float(total_questions_in_game)
 	
@@ -80,9 +65,7 @@ func _ready():
 	
 	_start_level(current_chapter_id)
 
-# Inițializează un nou nivel/capitol
 func _start_level(chapter_id: int):
-	# Resetăm variabilele locale de nivel
 	selected_questions.clear()
 	repeat_queue.clear()
 	current_question_index = 0
@@ -98,7 +81,6 @@ func _start_level(chapter_id: int):
 		print("Avertisment: Capitolul ", chapter_id, " are mai puțin de 6 întrebări!")
 	
 	pool.shuffle()
-	# Extragem exact numărul definit de întrebări
 	selected_questions = pool.slice(0, QUESTIONS_PER_LEVEL)
 	
 	for i in range(selected_questions.size()):
@@ -122,8 +104,8 @@ func _load_question(index: int):
 		label_level_title.text = "Recapitulare greșeli\nRăspunde corect pentru a trece mai departe!"
 
 	var q_id = current_question_data.get("id", "unknown")
-	if not game_stats.history.has(q_id):
-		game_stats.history[q_id] = {"attempts": 0, "solved": false}
+	if not Global.game_stats.history.has(q_id):
+		Global.game_stats.history[q_id] = {"attempts": 0, "solved": false}
 
 	question_label.text = str(current_question_data["text"])
 
@@ -137,8 +119,6 @@ func _load_question(index: int):
 		TYPE_TEXT:
 			_background_text()
 			_setup_text_answer()
-
-# ---------- SETUP UI ------------
 
 func _setup_single_choice():
 	single_container.visible = true
@@ -195,34 +175,18 @@ func _on_text_check_pressed():
 	var correct_answer = str(current_question_data["correct_answer"])
 	_handle_answer_result(user_answer.to_lower() == correct_answer.to_lower())
 
-# ---------- LOGICA CENTRALĂ: RĂSPUNS & STATISTICI ----------
-func get_question_number(q_data: Dictionary) -> int:
-	# id-uri de forma "c1_q3"
-	var id = q_data.get("id", "")
-	
-	if id is String and id.contains("_q"):
-		var parts = id.split("_q")
-		if parts.size() == 2:
-			return int(parts[1])
-
-	# fallback (nu ar trebui să ajungem aici)
-	return 1
-
 func _handle_answer_result(is_correct: bool):
 	_update_statistics(is_correct)
 	
 	if is_correct:
-		#feedback_label.text = "Corect! 🎉"
 		var page := PuzzlePiecePage.instantiate()
 		add_child(page)
-		# trimitem chapter + id-ul întrebării
 		var question_number = current_question_data["piece_number"]
 		var cap = current_chapter_id
 		
 		print("CAPITOLUL:", cap)
 		print("Q_NR:", question_number)
 		page.display_puzzle_piece(cap, question_number)
-		# așteptăm apăsarea butonului "Continuă"
 		await page.piece_displayed_and_closed
 		
 		if is_repeating_phase:
@@ -230,23 +194,18 @@ func _handle_answer_result(is_correct: bool):
 			if repeat_queue.is_empty():
 				_end_level_check()
 			else:
-				#await get_tree().create_timer(1.0).timeout
 				_load_question(0)
 		else:
 			current_question_index += 1
 			if current_question_index < selected_questions.size():
-				#await get_tree().create_timer(1.0).timeout
 				_load_question(current_question_index)
 			else:
 				if repeat_queue.is_empty():
 					_end_level_check()
 				else:
 					is_repeating_phase = true
-					#await get_tree().create_timer(1.0).timeout
 					_load_question(0)
 	else:
-		#feedback_label.text = "Greșit. Întrebarea va reveni."
-	
 		if not repeat_queue.has(current_question_data):
 			repeat_queue.append(current_question_data)
 		
@@ -267,81 +226,33 @@ func _handle_answer_result(is_correct: bool):
 
 func _update_statistics(is_correct: bool):
 	var q_id = current_question_data.get("id", "unknown")
-	var stats = game_stats.history[q_id]
+	var stats = Global.game_stats.history[q_id]
 	
 	stats["attempts"] += 1
 	
 	if is_correct:
 		stats["solved"] = true
 		
-		# --- LOGICA DE PUNCTAJ PENTRU MAX 100 ---
+		var points_earned = 0.0
 		if stats["attempts"] == 1:
-			game_stats["total_score"] += points_per_question
+			points_earned = points_per_question
 		elif stats["attempts"] == 2:
-			game_stats["total_score"] += points_per_question * 0.5
+			points_earned = points_per_question * 0.5
 		else:
-			game_stats["total_score"] += points_per_question * 0.2
+			points_earned = points_per_question * 0.2
+		
+		Global.game_stats["total_score"] += points_earned
 			
-	print("Score: ", round(game_stats["total_score"]), " | Q: ", q_id, " Attempts: ", stats["attempts"])
+	print("Score: ", round(Global.game_stats["total_score"]), " | Q: ", q_id, " Attempts: ", stats["attempts"])
 
 func _end_level_check():
-	# trimitem copilul să facă puzzle-ul
-	
-
-	#var animal_scene = Global.animal_scenes.get(current_chapter_id, "")
-	#feedback_label.text = "Nivelul " + str(current_chapter_id) + " Complet! 🏆"
-	
-	#await get_tree().create_timer(1.5).timeout
-	
-	#Global.current_level += 1
-	# Marchează nivelul curent ca finalizat
 	Global.current_level = current_chapter_id 
 	if not Global.completed_levels.has(current_chapter_id):
 		Global.completed_levels.append(current_chapter_id)
 
+	# Întotdeauna mergi la puzzle
 	Transition.fade_to_scene("res://scenes/puzzle/PuzzlePage.tscn")
-	# dacă mai sunt nivele → revine la hartă
-	#if Global.current_level < max_chapters:
-		##Transition.fade_to_scene(animal_scene)
-		#print("continua")
-	#else:
-		#_end_game_final()
 
-func _end_game_final():
-	single_container.visible = false
-	multi_container.visible = false
-	text_container.visible = false
-	question_label.text = "JOC COMPLET!"
-	label_level_title.text = "Felicitări!"
-	
-	# Rotunjim scorul final la cel mai apropiat număr întreg pentru afișare
-	var final_score_int = round(game_stats["total_score"])
-	
-	feedback_label.text = "Scor Final: " + str(final_score_int) + " / 100 puncte"
-	print("Game Over. Final Stats: ", game_stats)
-	
-	# --- SALVARE ÎN FIȘIER ---
-	_save_stats_to_file()
-
-func _save_stats_to_file():
-	var save_path = "user://quiz_stats.json"
-	var file = FileAccess.open(save_path, FileAccess.WRITE)
-	
-	if file:
-		# Adăugăm și un timestamp la salvare pentru evidență
-		var save_data = game_stats.duplicate()
-		save_data["timestamp"] = Time.get_datetime_string_from_system()
-		save_data["final_score_int"] = round(game_stats["total_score"])
-		
-		var json_string = JSON.stringify(save_data, "\t")
-		file.store_string(json_string)
-		
-		print("--- STATISTICI SALVATE CU SUCCES ---")
-		print("Locație: ", ProjectSettings.globalize_path(save_path))
-	else:
-		print("Eroare: Nu s-a putut salva fișierul de statistici!")
-
-# Funcții Background
 func _background_single():
 	var style := StyleBoxFlat.new()
 	style.bg_color = style_single

@@ -14,3 +14,28 @@ var animal_scenes := {
 	5: "res://scenes/pages/UrsPage.tscn",
 	6: "res://scenes/pages/CapibaraPage.tscn"
 }
+
+# Statistici joc - păstrate în memorie
+var game_stats = {
+	"total_score": 0.0,
+	"history": {}
+}
+
+# Funcție pentru a actualiza statisticile
+func update_question_stats(q_id: String, is_correct: bool, points_earned: float):
+	if not game_stats.history.has(q_id):
+		game_stats.history[q_id] = {"attempts": 0, "solved": false}
+	
+	var stats = game_stats.history[q_id]
+	stats["attempts"] += 1
+	
+	if is_correct:
+		stats["solved"] = true
+		game_stats["total_score"] += points_earned
+
+# Funcție pentru a reseta statisticile
+func reset_game_stats():
+	game_stats = {
+		"total_score": 0.0,
+		"history": {}
+	}

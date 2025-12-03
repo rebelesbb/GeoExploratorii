@@ -72,7 +72,7 @@ func _ready() -> void:
 	$NewMap/CityButtons/IasiButton.pressed.connect(_on_city_button_pressed.bind("iasi"))
 	$NewMap/CityButtons/ConstantaButton.pressed.connect(_on_city_button_pressed.bind("constanta"))
 	
-	last_level = Global.current_level
+	last_level = clamp(Global.current_level, 0, MAP_TEXTURES.size() - 1)
 	_set_initial_map()
 
 func _set_initial_map() -> void:
@@ -117,7 +117,7 @@ func _update_city_ui_for_level(level: int) -> void:
 		_hide_all_city_labels()
 		
 func _on_city_button_pressed(city: String) -> void:
-	print("APASAT ORAS: ", city)  # <= DEBUG
+	print("APASAT ORAS: ", city)
 	_hide_all_city_labels()
 
 	match city:
@@ -138,6 +138,10 @@ func _on_menu_button_pressed() -> void:
 	sidebar.visible = not sidebar.visible
 
 func _on_play_button_pressed() -> void:
+	if Global.current_level >= Global.sanctuary_level:
+		# Modifica logica pentru terminarea jocului
+		return
+	
 	Global.current_level += 1
 	print(Global.current_level)
 	update_map_with_fade()
@@ -150,4 +154,5 @@ func _on_puzzle_button_pressed() -> void:
 	get_tree().change_scene_to_file(PUZZLE_SCENE_PATH)
 
 func _on_info_button_pressed() -> void:
-	get_tree().change_scene_to_file(INFO_SCENE_PATH)
+	Transition.fade_to_scene("res://scenes/StatsPage.tscn")
+	
