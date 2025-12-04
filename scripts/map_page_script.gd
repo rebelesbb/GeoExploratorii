@@ -28,6 +28,8 @@ const MAP_TEXTURES := [
 	preload("res://assets/maps/harta_vecini.png"),
 	preload("res://assets/maps/harta_relief.png"),
 	preload("res://assets/maps/harta_ape.png"),
+	preload("res://assets/maps/harta_asezari.png"),
+	preload("res://assets/maps/harta_activitati.png"),
 	preload("res://assets/maps/harta_activitati.png"),
 	preload("res://assets/maps/harta_cluj.png")
 ]
@@ -108,8 +110,7 @@ func _hide_all_city_labels() -> void:
 		lbl.visible = false
 		
 func _update_city_ui_for_level(level: int) -> void:
-	var show_cities := (level == ACTIVITIES_MAP_LEVEL
-		or level == CLUJ_MAP_LEVEL)
+	var show_cities := (level >= ACTIVITIES_MAP_LEVEL)
 
 	city_buttons.visible = show_cities
 
@@ -144,7 +145,7 @@ func _on_play_button_pressed() -> void:
 	Transition.fade_to_scene(QUIZ_SCENE_PATH)
 
 func _on_sanctuar_button_pressed() -> void:
-	get_tree().change_scene_to_file(SANCTUAR_SCENE_PATH)
+	Transition.fade_to_scene(SANCTUAR_SCENE_PATH)
 
 func _on_puzzle_button_pressed() -> void:
 	get_tree().change_scene_to_file(PUZZLE_SCENE_PATH)
