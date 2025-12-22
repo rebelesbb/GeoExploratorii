@@ -101,7 +101,7 @@ func _on_music_toggle_pressed() -> void:
 	MusicPlayer.set_enabled(new_enabled)
 	_refresh_audio_icons()
 
-func _on_sound_toggle_pressed() -> void:s
+func _on_sound_toggle_pressed() -> void:
 	var new_enabled = not Click.is_enabled()
 	Click.set_enabled(new_enabled)
 	_refresh_audio_icons()

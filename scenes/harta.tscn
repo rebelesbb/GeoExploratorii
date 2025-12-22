@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://l0hjl8nmcka"]
+[gd_scene load_steps=11 format=3 uid="uid://l0hjl8nmcka"]
 
 [ext_resource type="Script" uid="uid://dj5tfpy2dshsn" path="res://scripts/map_page_script.gd" id="1_cq5r0"]
 [ext_resource type="Texture2D" uid="uid://cs6b01xeouj1t" path="res://assets/maps/harta_muta.png" id="2_julsu"]
@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://xblb2bvgm0fv" path="res://assets/maps/buttons/play_button.png" id="4_julsu"]
 [ext_resource type="Texture2D" uid="uid://dhuexkh1vrap" path="res://assets/maps/buttons/puzzleBttn.png" id="5_knf31"]
 [ext_resource type="Texture2D" uid="uid://babvomfypr2ui" path="res://assets/maps/buttons/infoBttn.png" id="6_7qwiy"]
-[ext_resource type="Texture2D" uid="uid://4ty3sjar8h7f" path="res://assets/maps/buttons/expertBttn.png" id="7_knf31"]
 [ext_resource type="Texture2D" uid="uid://bm68apk525jlp" path="res://assets/maps/buttons/music_on.png" id="7_7qwiy"]
+[ext_resource type="Texture2D" uid="uid://4ty3sjar8h7f" path="res://assets/maps/buttons/expertBttn.png" id="7_knf31"]
 [ext_resource type="Texture2D" uid="uid://brdwwehxkdsv7" path="res://assets/maps/buttons/sound_on.png" id="8_fvyw0"]
 
 [node name="Node2D" type="Node2D"]
@@ -114,7 +114,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 36.0
 offset_top = 81.0
-offset_right = 246.0
+offset_right = 315.0
 offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -123,23 +123,26 @@ grow_vertical = 0
 layout_mode = 1
 anchors_preset = -1
 offset_left = -0.99999994
-offset_right = 1735.0
-offset_bottom = 1709.9998
+offset_right = 1998.0
+offset_bottom = 2085.0
 scale = Vector2(0.2, 0.2)
 
 [node name="sanctuarButton" type="Button" parent="Control/Sidebar/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 icon = ExtResource("4_e72vd")
 flat = true
 
 [node name="puzzleButton" type="Button" parent="Control/Sidebar/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "Mergi la Puzzle"
 icon = ExtResource("5_knf31")
 flat = true
 
 [node name="infoButton" type="Button" parent="Control/Sidebar/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "Informatii"
 icon = ExtResource("6_7qwiy")
 flat = true
@@ -157,14 +160,15 @@ alignment = 1
 
 [node name="musicButton" type="Button" parent="Control/Sidebar/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
 size_flags_stretch_ratio = 0.0
 icon = ExtResource("7_7qwiy")
 flat = true
 
 [node name="clickButton" type="Button" parent="Control/Sidebar/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 0
+size_flags_stretch_ratio = 1.08
 icon = ExtResource("8_fvyw0")
 flat = true
 
