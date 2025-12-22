@@ -7,6 +7,7 @@ extends Control
 @onready var sanctuar_button: Button = $Sidebar/VBoxContainer/sanctuarButton
 @onready var puzzle_button: Button = $Sidebar/VBoxContainer/puzzleButton
 @onready var info_button: Button = $Sidebar/VBoxContainer/infoButton
+@onready var expert_button: Button = $Sidebar/VBoxContainer/expertButton
 
 @onready var old_map: TextureRect = $OldMap
 @onready var new_map: TextureRect = $NewMap
@@ -41,6 +42,7 @@ const QUIZ_SCENE_PATH := "res://scenes/QuizPage.tscn"
 const SANCTUAR_SCENE_PATH := "res://scenes/pages/Sanctuar.tscn"
 const PUZZLE_SCENE_PATH := "res://scenes/Puzzle.tscn"
 const INFO_SCENE_PATH := "res://scenes/Info.tscn"
+const APE_SCENE_PATH := "res://scenes/ApeRelief.tscn"
 
 var last_level: int = 0
 
@@ -56,6 +58,7 @@ func _ready() -> void:
 	sanctuar_button.pressed.connect(_on_sanctuar_button_pressed)
 	puzzle_button.pressed.connect(_on_puzzle_button_pressed)
 	info_button.pressed.connect(_on_info_button_pressed)
+	expert_button.pressed.connect(_on_expert_bttn_pressed)
 	
 	all_city_labels = [
 		timisoara_label,
@@ -74,8 +77,11 @@ func _ready() -> void:
 	$NewMap/CityButtons/IasiButton.pressed.connect(_on_city_button_pressed.bind("iasi"))
 	$NewMap/CityButtons/ConstantaButton.pressed.connect(_on_city_button_pressed.bind("constanta"))
 	
-	last_level = clamp(Global.current_level, 0, MAP_TEXTURES.size() - 1)
+	last_level = clamp(Global.current_level - 1, 0, MAP_TEXTURES.size() - 1)
 	_set_initial_map()
+	if Global.should_animate :
+		update_map_with_fade()
+		Global.should_animate = false
 
 func _set_initial_map() -> void:
 	var lvl: int = clamp(Global.current_level, 0, MAP_TEXTURES.size() - 1)
@@ -137,11 +143,14 @@ func _on_city_button_pressed(city: String) -> void:
 
 func _on_menu_button_pressed() -> void:
 	sidebar.visible = not sidebar.visible
+	
+func _on_expert_bttn_pressed() -> void:
+	Transition.fade_to_scene(APE_SCENE_PATH)
 
 func _on_play_button_pressed() -> void:
 	Global.current_level += 1
 	print(Global.current_level)
-	update_map_with_fade()
+	Global.should_animate = true
 	Transition.fade_to_scene(QUIZ_SCENE_PATH)
 
 func _on_sanctuar_button_pressed() -> void:

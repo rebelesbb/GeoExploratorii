@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://btsjpfslyf2aq"]
+
+[ext_resource type="Script" uid="uid://n1dps0niehrf" path="res://scripts/ape_relief.gd" id="1_41lai"]
+[ext_resource type="Texture2D" uid="uid://xblb2bvgm0fv" path="res://assets/maps/buttons/play_button.png" id="1_d7kiv"]
+[ext_resource type="Texture2D" uid="uid://c702y4ojouak1" path="res://assets/ape_relief/welcome_message.png" id="2_4thax"]
+[ext_resource type="Texture2D" uid="uid://bjq8ga2p4w0c8" path="res://assets/maps/buttons/back_button.png" id="2_41lai"]
+[ext_resource type="Texture2D" uid="uid://c8acjjul474lb" path="res://assets/home_page_button.png" id="3_4thax"]
+
+[node name="PhotoViewer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_41lai")
+
+[node name="Bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4thax")
+expand_mode = 2
+
+[node name="NextButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 2
+icon = ExtResource("1_d7kiv")
+flat = true
+expand_icon = true
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -50.0
+offset_right = 100.0
+offset_bottom = 50.0
+grow_vertical = 2
+icon = ExtResource("2_41lai")
+flat = true
+expand_icon = true
+
+[node name="HomeButton" type="Button" parent="."]
+layout_mode = 1
+offset_right = 100.0
+offset_bottom = 100.0
+icon = ExtResource("3_4thax")
+flat = true
+expand_icon = true
