@@ -20,6 +20,15 @@ extends Control
 @onready var iasi_label: Label          = $IasiLabel
 @onready var constanta_label: Label     = $ConstantaLbel
 
+@onready var music_toggle: Button = $Sidebar/VBoxContainer/HBoxContainer/musicButton
+@onready var sound_toggle: Button = $Sidebar/VBoxContainer/HBoxContainer/clickButton
+
+const TEX_MUSIC_ON  := preload("res://assets/maps/buttons/music_on.png")
+const TEX_MUSIC_OFF := preload("res://assets/maps/buttons/music_off.png")
+const TEX_SOUND_ON  := preload("res://assets/maps/buttons/sound_on.png")
+const TEX_SOUND_OFF := preload("res://assets/maps/buttons/sound_off.png")
+
+
 var all_city_labels: Array[Label]
 
 # map textures
@@ -76,6 +85,27 @@ func _ready() -> void:
 	
 	last_level = clamp(Global.current_level, 0, MAP_TEXTURES.size() - 1)
 	_set_initial_map()
+	music_toggle.pressed.connect(_on_music_toggle_pressed)
+	sound_toggle.pressed.connect(_on_sound_toggle_pressed)
+	_refresh_audio_icons()
+	
+	
+func _on_music_toggle_pressed() -> void:
+	var new_enabled = not MusicPlayer.is_enabled()
+	MusicPlayer.set_enabled(new_enabled)
+	_refresh_audio_icons()
+
+func _on_sound_toggle_pressed() -> void:s
+	var new_enabled = not Click.is_enabled()
+	Click.set_enabled(new_enabled)
+	_refresh_audio_icons()
+
+func _refresh_audio_icons() -> void:
+	music_toggle.icon = TEX_MUSIC_ON if MusicPlayer.is_enabled() else TEX_MUSIC_OFF
+	sound_toggle.icon = TEX_SOUND_ON if Click.is_enabled() else TEX_SOUND_OFF
+
+	
+
 
 func _set_initial_map() -> void:
 	var lvl: int = clamp(Global.current_level, 0, MAP_TEXTURES.size() - 1)
