@@ -75,7 +75,7 @@ var chapters = {
 			"id": "c1_q10",
 			"type": TYPE_TEXT,
 			"text": "Capitala țării noastre este la ______.",
-			"correct_answer": "București"
+			"correct_answer": "Bucuresti"
 		}
 	],
 	

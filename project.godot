@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 Global="*res://scripts/global.gd"
 Transition="*res://scenes/transition.tscn"
+MusicPlayer="*res://scenes/music.tscn"
+Click="*res://scenes/click.tscn"
 
 [display]
 
