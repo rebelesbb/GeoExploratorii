@@ -41,7 +41,7 @@ var chapters = {
 			"id": "c1_q5",
 			"type": TYPE_TEXT,
 			"text": "Râul care formează granița de est cu Republica Moldova este ______.",
-			"correct_answer": "Prut"
+			"correct_answer": ["Prut", "Prutul"]
 		},
 		{
 			"id": "c1_q6",
@@ -75,7 +75,7 @@ var chapters = {
 			"id": "c1_q10",
 			"type": TYPE_TEXT,
 			"text": "Capitala țării noastre este la ______.",
-			"correct_answer": "Bucuresti"
+			"correct_answer": ["Bucuresti", "București"]
 		}
 	],
 	
@@ -105,7 +105,7 @@ var chapters = {
 			"id": "c2_q4",
 			"type": TYPE_TEXT,
 			"text": "Munții Carpați s-au format prin încrețirea scoarței ______.",
-			"correct_answer": "Terestre"
+			"correct_answer": ["Terestre", "Terestra"]
 		},
 		{
 			"id": "c2_q5",
@@ -146,7 +146,7 @@ var chapters = {
 			"id": "c2_q10",
 			"type": TYPE_TEXT,
 			"text": "Forma de relief intermediară între munte și câmpie se numește ______.",
-			"correct_answer": "Deal"
+			"correct_answer": ["Deal", "Dealul"]
 		}
 	],
 	
@@ -190,7 +190,7 @@ var chapters = {
 			"id": "c3_q6",
 			"type": TYPE_TEXT,
 			"text": "Locul de unde izvorăște un râu se numește ______.",
-			"correct_answer": "Izvor"
+			"correct_answer": ["Izvor", "Izvorul"]
 		},
 		{
 			"id": "c3_q7",
@@ -231,7 +231,7 @@ var chapters = {
 			"id": "c3_q12",
 			"type": TYPE_TEXT,
 			"text": "Pădurile care își pierd frunzele toamna sunt păduri de ______.",
-			"correct_answer": "Foioase"
+			"correct_answer": ["Foioase", "Foioasa"]
 		},
 		{
 			"id": "c3_q13",
@@ -282,13 +282,13 @@ var chapters = {
 			"id": "c4_q5",
 			"type": TYPE_TEXT,
 			"text": "Așezările umane urbane se numesc ______.",
-			"correct_answer": "Orașe"
+			"correct_answer": ["Orașe", "Orase", "Oraș", "Oras"]
 		},
 		{
 			"id": "c4_q6",
 			"type": TYPE_TEXT,
 			"text": "Totalitatea locuitorilor de pe un anumit teritoriu formează ______.",
-			"correct_answer": "Populația"
+			"correct_answer": ["Populația", "Populatia", "Populație", "Populatie"]
 		},
 		{
 			"id": "c4_q7",
@@ -381,7 +381,7 @@ var chapters = {
 			"id": "c5_q9",
 			"type": TYPE_TEXT,
 			"text": "Resursa naturală lichidă din care se face benzină este ______.",
-			"correct_answer": "Petrolul"
+			"correct_answer": ["Petrolul", "Petrol"]
 		},
 		{
 			"id": "c5_q10",
@@ -439,7 +439,7 @@ var chapters = {
 			"id": "c6_q3",
 			"type": TYPE_TEXT,
 			"text": "Animalul crescut în special la munte pentru lână și lapte este ______.",
-			"correct_answer": "Oaia"
+			"correct_answer": ["Oaia", "Oaie"]
 		},
 		{
 			"id": "c6_q4",
@@ -459,7 +459,7 @@ var chapters = {
 			"id": "c6_q6",
 			"type": TYPE_TEXT,
 			"text": "Sarea este o resursă de ______.",
-			"correct_answer": "Subsol"
+			"correct_answer": ["Subsol", "Subsolul"]
 		},
 		{
 			"id": "c6_q7",
@@ -486,7 +486,7 @@ var chapters = {
 			"id": "c6_q10",
 			"type": TYPE_TEXT,
 			"text": "Înainte de a se vărsa în Marea Neagră, Dunărea formează o ______.",
-			"correct_answer": "Deltă"
+			"correct_answer": ["Deltă", "Delta"]
 		}
 	],
 	
@@ -516,7 +516,7 @@ var chapters = {
 			"id": "c7_q4",
 			"type": TYPE_TEXT,
 			"text": "Cetatea istorică situată pe un deal din Cluj-Napoca se numește ______.",
-			"correct_answer": "Cetățuia"
+			"correct_answer": ["Cetățuia", "Cetatuia", "Cetatea", "Cetățuie"]
 		},
 		{
 			"id": "c7_q5",
@@ -543,7 +543,7 @@ var chapters = {
 			"id": "c7_q8",
 			"type": TYPE_TEXT,
 			"text": "Municipiul de reședință al județului nostru este ______.",
-			"correct_answer": "Cluj-Napoca"
+			"correct_answer": ["Cluj-Napoca", "Cluj Napoca"]
 		},
 		{
 			"id": "c7_q9",
