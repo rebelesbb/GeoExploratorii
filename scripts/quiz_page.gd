@@ -172,8 +172,37 @@ func _setup_text_answer():
 
 func _on_text_check_pressed():
 	var user_answer = text_line_edit.text.strip_edges()
-	var correct_answer = str(current_question_data["correct_answer"])
-	_handle_answer_result(user_answer.to_lower() == correct_answer.to_lower())
+	var correct_data = current_question_data["correct_answer"]
+	var is_correct = false
+	
+	# Check if the correct answer is a list of options (Array) or a single String
+	if typeof(correct_data) == TYPE_ARRAY:
+		for variant in correct_data:
+			if _compare_answers(user_answer, str(variant)):
+				is_correct = true
+				break
+	else:
+		# Compatibility for single string answers
+		is_correct = _compare_answers(user_answer, str(correct_data))
+		
+	_handle_answer_result(is_correct)
+
+# Helper function to compare two strings ignoring case and diacritics
+func _compare_answers(user_input: String, correct_variant: String) -> bool:
+	var u_norm = _remove_diacritics(user_input.to_lower())
+	var c_norm = _remove_diacritics(correct_variant.to_lower())
+	return u_norm == c_norm
+
+# Helper function to remove Romanian diacritics
+func _remove_diacritics(text: String) -> String:
+	var replacements = {
+		"ă": "a", "â": "a", "î": "i", "ș": "s", "ț": "t",
+		"Ă": "A", "Â": "A", "Î": "I", "Ș": "S", "Ț": "T"
+	}
+	var result = text
+	for k in replacements:
+		result = result.replace(k, replacements[k])
+	return result
 
 func _handle_answer_result(is_correct: bool):
 	_update_statistics(is_correct)
