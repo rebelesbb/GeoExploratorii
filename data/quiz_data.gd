@@ -125,14 +125,14 @@ var chapters = {
 			"id": "c2_q7",
 			"type": TYPE_MULTI,
 			"text": "Care dintre următoarele sunt caracteristici ale munților?",
-			"options": ["Au altitudini mari", "Sunt netezi ca o masă", "Au versanți abrupți", "Sunt buni pentru agricultură intensivă"],
+			"options": ["Altitudini mari", "Netezi ca o masă", "Versanți abrupți", "Buni pentru agricultură"],
 			"correct_indices": [0, 2]
 		},
 		{
 			"id": "c2_q8",
 			"type": TYPE_SINGLE,
 			"text": "Unitatea de relief situată în interiorul arcului Carpatic este:",
-			"options": ["Depresiunea Colinară a Transilvaniei", "Câmpia Română", "Podișul Moldovei", "Subcarpații"],
+			"options": ["Podișul Transilvaniei", "Câmpia Română", "Podișul Moldovei", "Subcarpații"],
 			"correct_index": 0
 		},
 		{
@@ -203,7 +203,7 @@ var chapters = {
 			"id": "c3_q8",
 			"type": TYPE_SINGLE,
 			"text": "La ce etaj de vegetație întâlnim ursul brun și cerbul?",
-			"options": ["În zona de stepă", "În zona pădurilor (foioase și conifere)", "În Delta Dunării", "Pe litoral"],
+			"options": ["În zona de stepă", "În zona pădurilor", "În Delta Dunării", "Pe litoral"],
 			"correct_index": 1
 		},
 		{
@@ -217,7 +217,7 @@ var chapters = {
 			"id": "c3_q10",
 			"type": TYPE_SINGLE,
 			"text": "Cum sunt solurile în zonele de câmpie, unde se dezvoltă vegetația de stepă?",
-			"options": ["Foarte fertile (cernoziomuri)", "Stâncoase", "Înghețate", "Nisipoase și sărace"],
+			"options": ["Foarte fertile", "Stâncoase", "Înghețate", "Nisipoase și sărace"],
 			"correct_index": 0
 		},
 		{
@@ -261,7 +261,7 @@ var chapters = {
 			"id": "c4_q2",
 			"type": TYPE_SINGLE,
 			"text": "Ce reprezintă densitatea populației?",
-			"options": ["Numărul total de locuitori", "Numărul de locuitori pe un km pătrat", "Numărul de orașe", "Numărul de copii"],
+			"options": ["Numărul total de locuitori", "Nr. de locuitori / km pătrat", "Numărul de orașe", "Numărul de copii"],
 			"correct_index": 1
 		},
 		{
@@ -275,7 +275,7 @@ var chapters = {
 			"id": "c4_q4",
 			"type": TYPE_MULTI,
 			"text": "Care sunt caracteristicile așezărilor rurale (sate)?",
-			"options": ["Au mai puțini locuitori ca orașele", "Ocupația principală este agricultura", "Au blocuri turn", "Păstrează tradițiile"],
+			"options": ["Mai puțini locuitori ca orașele", "Ocupația principală este agricultura", "Au blocuri turn", "Păstrează tradițiile"],
 			"correct_indices": [0, 1, 3]
 		},
 		{
@@ -360,7 +360,7 @@ var chapters = {
 			"id": "c5_q6",
 			"type": TYPE_SINGLE,
 			"text": "În ce zone de relief se cultivă predominant vița-de-vie și pomii fructiferi?",
-			"options": ["În zonele de munte", "În zonele de deal și podiș", "În Delta Dunării", "În luncile râurilor"],
+			"options": ["Munte", "Deal și podiș", "Delta Dunării", "Luncile râurilor"],
 			"correct_index": 1
 		},
 		{
@@ -452,7 +452,7 @@ var chapters = {
 			"id": "c6_q5",
 			"type": TYPE_MULTI,
 			"text": "Ce caracteristici are Marea Neagră?",
-			"options": ["Este o mare deschisă", "Are maree mici", "Este o mare continentală", "Apa este dulce"],
+			"options": ["Mare deschisă", "Are maree mici", "Mare continentală", "Apa este dulce"],
 			"correct_indices": [1, 2]
 		},
 		{

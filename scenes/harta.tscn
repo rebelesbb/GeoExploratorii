@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://l0hjl8nmcka"]
+[gd_scene load_steps=12 format=3 uid="uid://r17056n6nlub"]
 
 [ext_resource type="Script" uid="uid://dj5tfpy2dshsn" path="res://scripts/map_page_script.gd" id="1_cq5r0"]
 [ext_resource type="Texture2D" uid="uid://cs6b01xeouj1t" path="res://assets/maps/harta_muta.png" id="2_julsu"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bm68apk525jlp" path="res://assets/maps/buttons/music_on.png" id="7_7qwiy"]
 [ext_resource type="Texture2D" uid="uid://4ty3sjar8h7f" path="res://assets/maps/buttons/expertBttn.png" id="7_knf31"]
 [ext_resource type="Texture2D" uid="uid://brdwwehxkdsv7" path="res://assets/maps/buttons/sound_on.png" id="8_fvyw0"]
+[ext_resource type="Texture2D" uid="uid://c7ixxno6k5mcg" path="res://assets/maps/buttons/reload button.png" id="11_3tpmt"]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(1, -2)
@@ -181,6 +182,18 @@ offset_bottom = 562.0
 scale = Vector2(0.14869203, 0.16402352)
 icon = ExtResource("4_julsu")
 flat = true
+
+[node name="refreshButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1146.0
+offset_top = 29.0
+offset_right = 1738.0
+offset_bottom = 547.2184
+scale = Vector2(0.14869203, 0.16402352)
+icon = ExtResource("11_3tpmt")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="TimisoaraLabel" type="Label" parent="Control"]
 visible = false

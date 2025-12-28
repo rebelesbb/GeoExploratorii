@@ -10,10 +10,11 @@ var should_animate: bool = false
 var animal_scenes := {
 	1: "res://scenes/pages/CaprioaraPage.tscn",
 	2: "res://scenes/pages/UrsPage.tscn",
-	3: "res://scenes/pages/LupPage.tscn",
-	4: "res://scenes/pages/OaiePage.tscn",
-	5: "res://scenes/pages/RataPage.tscn",
-	6: "res://scenes/pages/CapibaraPage.tscn"
+	3: "res://scenes/pages/RataPage.tscn",
+	4: "res://scenes/pages/LupPage.tscn",
+	5: "res://scenes/pages/OaiePage.tscn",
+	6: "res://scenes/pages/CastorPage.tscn",
+	7: "res://scenes/pages/CapibaraPage.tscn"
 }
 
 # Statistici joc - păstrate în memorie
@@ -40,3 +41,10 @@ func reset_game_stats():
 		"total_score": 0.0,
 		"history": {}
 	}
+
+func reset_full_game():
+	current_level = 0
+	max_level_unlocked = 0
+	completed_levels = []
+	should_animate = false
+	reset_game_stats() 

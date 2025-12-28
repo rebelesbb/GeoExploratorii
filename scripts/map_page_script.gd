@@ -3,6 +3,7 @@ extends Control
 @onready var sidebar: Panel = $Sidebar
 @onready var menu_button: Button = $MenuButton
 @onready var play_button: Button = $playButton
+@onready var refresh_button: Button = $refreshButton
 
 @onready var sanctuar_button: Button = $Sidebar/VBoxContainer/sanctuarButton
 @onready var puzzle_button: Button = $Sidebar/VBoxContainer/puzzleButton
@@ -46,6 +47,7 @@ const MAP_TEXTURES := [
 
 const ACTIVITIES_MAP_LEVEL := 4
 const CLUJ_MAP_LEVEL := 5
+const MAX_CHAPTERS = 7
 
 const QUIZ_SCENE_PATH := "res://scenes/QuizPage.tscn"
 const SANCTUAR_SCENE_PATH := "res://scenes/pages/Sanctuar.tscn"
@@ -68,6 +70,10 @@ func _ready() -> void:
 	puzzle_button.pressed.connect(_on_puzzle_button_pressed)
 	info_button.pressed.connect(_on_info_button_pressed)
 	expert_button.pressed.connect(_on_expert_bttn_pressed)
+	
+	if refresh_button:
+		refresh_button.pressed.connect(_on_refresh_button_pressed)
+	_check_game_finished()
 	
 	all_city_labels = [
 		timisoara_label,
@@ -95,6 +101,17 @@ func _ready() -> void:
 	sound_toggle.pressed.connect(_on_sound_toggle_pressed)
 	_refresh_audio_icons()
 	
+	
+func _check_game_finished():
+	var is_finished = (Global.current_level >= MAX_CHAPTERS)
+	
+	play_button.visible = !is_finished
+	if refresh_button:
+		refresh_button.visible = is_finished
+		
+func _on_refresh_button_pressed():
+	Global.reset_full_game()
+	Transition.fade_to_scene("res://scenes/StartScreen.tscn")
 	
 func _on_music_toggle_pressed() -> void:
 	var new_enabled = not MusicPlayer.is_enabled()
