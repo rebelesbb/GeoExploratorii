@@ -10,6 +10,6 @@ required_level = 3
 animal_id = "rata"
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(619, 363)
+position = Vector2(625, 352)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_0bmry")

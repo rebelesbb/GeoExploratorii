@@ -10,6 +10,6 @@ required_level = 6
 animal_id = "castor"
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(616, 382)
+position = Vector2(657, 387)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_kjphq")

@@ -10,6 +10,6 @@ required_level = 4
 animal_id = "lup"
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(634, 383)
+position = Vector2(661, 386)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_m6n0s")

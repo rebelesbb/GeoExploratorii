@@ -10,6 +10,6 @@ required_level = 5
 animal_id = "oaie"
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(610, 374)
+position = Vector2(649, 371)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_1pyx4")
