@@ -10,6 +10,9 @@ required_level = 3
 animal_id = "rata"
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(625, 352)
+position = Vector2(635, 360)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_0bmry")
+
+[node name="NameTag" parent="." index="1"]
+visible = false

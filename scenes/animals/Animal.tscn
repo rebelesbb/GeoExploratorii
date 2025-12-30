@@ -1,12 +1,27 @@
-[gd_scene format=3 uid="uid://dpjccshikuhvr"]
+[gd_scene load_steps=2 format=3 uid="uid://dpjccshikuhvr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dkv0q"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.19607843)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Animal" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="NameLabel" type="Label" parent="."]
-offset_left = 614.0
-offset_top = 246.0
-offset_right = 669.0
-offset_bottom = 269.0
+[node name="NameTag" type="PanelContainer" parent="."]
+offset_left = 600.0
+offset_top = 237.0
+offset_right = 700.0
+offset_bottom = 277.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dkv0q")
+
+[node name="NameLabel" type="Label" parent="NameTag"]
+layout_mode = 2
 horizontal_alignment = 1

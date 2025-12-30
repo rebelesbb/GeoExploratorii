@@ -10,6 +10,9 @@ required_level = 7
 animal_id = "capibara"
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(638, 348)
+position = Vector2(638, 355)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_vlic2")
+
+[node name="NameTag" parent="." index="1"]
+visible = false
