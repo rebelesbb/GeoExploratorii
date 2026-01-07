@@ -13,6 +13,11 @@ const TYPE_TEXT = QuizDataResource.TYPE_TEXT
 @onready var question_label = $MarginContainer/VBoxContainer/QuestionPanel/QuestionLabel
 @onready var feedback_label = $MarginContainer/VBoxContainer/FeedbackLabel
 
+@onready var pause_button: Button = $PauseButton
+@onready var pause_overlay: Control = $PauseOverlay
+@onready var continue_button: Button = $PauseOverlay/Panel/ContinueButton
+@onready var restart_button: Button = $PauseOverlay/Panel/RestartButton
+
 @onready var single_container = $MarginContainer/VBoxContainer/QuestionTypeRoot/SingleChoiceContainer
 @onready var single_buttons = [
 	$MarginContainer/VBoxContainer/QuestionTypeRoot/SingleChoiceContainer/GridContainer/AnswerButton0,
@@ -55,11 +60,28 @@ var style_text := Color("df7c99ff")
 func _ready():
 	quiz_data_resource = QuizDataResource.new()
 	current_chapter_id = max(1, Global.current_level)
+	Global.load_game()
+
+	# UI pauză
+	_setup_pause_ui()
+	
+	current_chapter_id = max(1, Global.current_level)
 
 	var total_questions_in_game = max_chapters * QUESTIONS_PER_LEVEL
-	
 	if total_questions_in_game > 0:
 		points_per_question = 100.0 / float(total_questions_in_game)
+
+	print("Valoare per întrebare: ", points_per_question)
+
+	# ✅ dacă există quiz activ salvat, reia exact unde a rămas
+	if Global.quiz_state.get("active", false):
+		_restore_quiz_from_save()
+	else:
+		_start_level(current_chapter_id)
+
+	# salvează că ești în quiz
+	_mark_quiz_active()
+	Global.save_game()
 	
 	print("Valoare per întrebare: ", points_per_question)
 	
@@ -119,6 +141,10 @@ func _load_question(index: int):
 		TYPE_TEXT:
 			_background_text()
 			_setup_text_answer()
+	
+	_save_quiz_state()
+	Global.save_game()
+
 
 func _setup_single_choice():
 	single_container.visible = true
@@ -252,6 +278,9 @@ func _handle_answer_result(is_correct: bool):
 			repeat_queue.append(failed_q)
 			await get_tree().create_timer(1.0).timeout
 			_load_question(0)
+	_save_quiz_state()
+	Global.save_game()
+
 
 func _update_statistics(is_correct: bool):
 	var q_id = current_question_data.get("id", "unknown")
@@ -279,6 +308,9 @@ func _end_level_check():
 	if not Global.completed_levels.has(current_chapter_id):
 		Global.completed_levels.append(current_chapter_id)
 
+	_mark_quiz_inactive()
+	Global.save_game()
+	
 	# Întotdeauna mergi la puzzle
 	Transition.fade_to_scene("res://scenes/puzzle/PuzzlePage.tscn")
 
@@ -296,3 +328,130 @@ func _background_text():
 	var style := StyleBoxFlat.new()
 	style.bg_color = style_text
 	background_panel.set("theme_override_styles/panel", style)
+
+func _setup_pause_ui() -> void:
+	pause_overlay.visible = false
+
+	# ca butoanele să funcționeze când jocul e paused:
+	pause_overlay.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	continue_button.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	restart_button.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	pause_button.process_mode = Node.PROCESS_MODE_ALWAYS
+
+	pause_button.pressed.connect(_on_pause_pressed)
+	continue_button.pressed.connect(_on_continue_pressed)
+	restart_button.pressed.connect(_on_restart_pressed)
+
+	set_process_unhandled_input(true)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"): # ESC/back (pe unele tablete)
+		if get_tree().paused:
+			_resume_game()
+		else:
+			_pause_game()
+
+func _on_pause_pressed() -> void:
+	_pause_game()
+
+func _on_continue_pressed() -> void:
+	_resume_game()
+
+func _on_restart_pressed() -> void:
+	# Restart JOC (cum ai cerut): șterge progres + merge la StartScreen
+	_resume_game()
+	Global.reset_full_game()
+	Transition.fade_to_scene("res://scenes/StartScreen.tscn")
+
+func _pause_game() -> void:
+	get_tree().paused = true
+	pause_overlay.visible = true
+	_save_quiz_state()
+	Global.save_game()
+
+func _resume_game() -> void:
+	pause_overlay.visible = false
+	get_tree().paused = false
+
+func _mark_quiz_active() -> void:
+	if Global.quiz_state.is_empty():
+		Global.quiz_state = {}
+	Global.quiz_state["active"] = true
+
+func _mark_quiz_inactive() -> void:
+	Global.quiz_state = {"active": false}
+
+func _save_quiz_state() -> void:
+	_mark_quiz_active()
+	Global.quiz_state["chapter_id"] = current_chapter_id
+
+	# salvăm doar ID-urile întrebărilor ca să reconstruim la load
+	var selected_ids: Array[String] = []
+	for q in selected_questions:
+		selected_ids.append(str(q.get("id", "")))
+
+	var repeat_ids: Array[String] = []
+	for q in repeat_queue:
+		repeat_ids.append(str(q.get("id", "")))
+
+	Global.quiz_state["selected_ids"] = selected_ids
+	Global.quiz_state["repeat_ids"] = repeat_ids
+	Global.quiz_state["current_question_index"] = int(current_question_index)
+	Global.quiz_state["is_repeating_phase"] = bool(is_repeating_phase)
+
+func _restore_quiz_from_save() -> void:
+	var qs: Dictionary = Global.quiz_state
+	var chapter_id: int = int(qs.get("chapter_id", max(1, Global.current_level)))
+	current_chapter_id = chapter_id
+
+	selected_questions.clear()
+	repeat_queue.clear()
+
+	var selected_ids: Array = qs.get("selected_ids", [])
+	var repeat_ids: Array = qs.get("repeat_ids", [])
+
+	# reconstruim întrebările din resursă după id
+	for i in range(selected_ids.size()):
+		var q = _find_question_by_id(chapter_id, str(selected_ids[i]))
+		if q.is_empty():
+			continue
+		q = q.duplicate()
+		q["piece_number"] = i + 1
+		selected_questions.append(q)
+
+	for rid in repeat_ids:
+		var rq = _find_question_by_id(chapter_id, str(rid))
+		if rq.is_empty():
+			continue
+		# piece_number trebuie să corespundă cu cea din selected, dacă există
+		var matched_piece := 1
+		for sq in selected_questions:
+			if str(sq.get("id","")) == str(rid):
+				matched_piece = int(sq.get("piece_number", 1))
+				break
+		rq = rq.duplicate()
+		rq["piece_number"] = matched_piece
+		repeat_queue.append(rq)
+
+	current_question_index = int(qs.get("current_question_index", 0))
+	is_repeating_phase = bool(qs.get("is_repeating_phase", false))
+
+	# fallback dacă ceva nu e ok
+	if selected_questions.is_empty():
+		_start_level(current_chapter_id)
+		return
+
+	# în repeating phase index-ul e ignorat, folosești repeat_queue[0]
+	if is_repeating_phase:
+		_load_question(0)
+	else:
+		current_question_index = clamp(current_question_index, 0, selected_questions.size() - 1)
+		_load_question(current_question_index)
+
+func _find_question_by_id(chapter_id: int, q_id: String) -> Dictionary:
+	if not quiz_data_resource.chapters.has(chapter_id):
+		return {}
+	for q in quiz_data_resource.chapters[chapter_id]:
+		if str(q.get("id","")) == q_id:
+			return q
+	return {}

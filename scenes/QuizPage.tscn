@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://brksnq0r0lk2d"]
+[gd_scene load_steps=15 format=3 uid="uid://4ucuy6wn8gql"]
 
 [ext_resource type="Script" uid="uid://cdsr2jsaxr5cf" path="res://scripts/quiz_page.gd" id="1_puuyo"]
 [ext_resource type="Texture2D" uid="uid://ddrw72dfil2n5" path="res://assets/images/answ_bg_red.png" id="2_s03yw"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dx6ew0erlqyjs" path="res://assets/images/answ_bg_blue.png" id="4_1l753"]
 [ext_resource type="Texture2D" uid="uid://c0ll2rvtae6if" path="res://assets/images/answ_bg_yellow.png" id="5_2uaje"]
 [ext_resource type="Texture2D" uid="uid://cbtstov3sa7mh" path="res://assets/images/check_button.png" id="6_5dte4"]
+[ext_resource type="Texture2D" uid="uid://dkqibbyubu75u" path="res://assets/images/close_button.png" id="7_ltliw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s03yw"]
 
@@ -18,6 +19,8 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5dte4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_estm6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_irwnl"]
 
 [node name="QuizPage" type="Control"]
 layout_mode = 3
@@ -272,3 +275,66 @@ vertical_alignment = 1
 
 [node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="PauseButton" type="Button" parent="."]
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 93.0
+icon = ExtResource("7_ltliw")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="PauseOverlay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PauseOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.003921569, 0.003921569, 0.003921569, 0.6392157)
+
+[node name="Panel" type="Panel" parent="PauseOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_irwnl")
+
+[node name="ContinueButton" type="Button" parent="PauseOverlay/Panel"]
+layout_mode = 0
+offset_left = -130.0
+offset_top = -103.0
+offset_right = 155.0
+offset_bottom = -6.0
+icon = ExtResource("4_1l753")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="RestartButton" type="Button" parent="PauseOverlay/Panel"]
+layout_mode = 0
+offset_left = -160.0
+offset_top = 47.0
+offset_right = 187.0
+offset_bottom = 136.0
+icon = ExtResource("2_s03yw")
+flat = true
+icon_alignment = 1
+expand_icon = true
