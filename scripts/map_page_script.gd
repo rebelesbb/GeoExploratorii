@@ -5,6 +5,16 @@ extends Control
 @onready var play_button: Button = $playButton
 @onready var refresh_button: Button = $refreshButton
 
+var _play_hint_tween: Tween
+var _sidebar_tween: Tween
+var _sidebar_items: Array[Control] = []
+var _sidebar_item_base_pos: Dictionary[Control, Vector2] = {}
+
+const SIDEBAR_ITEM_SLIDE := 70.0
+const SIDEBAR_ITEM_STAGGER := 0.06
+const SIDEBAR_ITEM_DURATION := 0.22
+
+
 @onready var sanctuar_button: Button = $Sidebar/VBoxContainer/sanctuarButton
 @onready var puzzle_button: Button = $Sidebar/VBoxContainer/puzzleButton
 @onready var info_button: Button = $Sidebar/VBoxContainer/infoButton
@@ -59,6 +69,10 @@ var last_level: int = 0
 
 func _ready() -> void:
 	sidebar.visible = false
+	call_deferred("_init_sidebar_layout_cache")
+	#_cache_sidebar_items()
+	_prepare_sidebar_closed_state()
+
 	
 	old_map.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	new_map.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -73,6 +87,7 @@ func _ready() -> void:
 	
 	if refresh_button:
 		refresh_button.pressed.connect(_on_refresh_button_pressed)
+
 	_check_game_finished()
 	
 	all_city_labels = [
@@ -101,13 +116,29 @@ func _ready() -> void:
 	sound_toggle.pressed.connect(_on_sound_toggle_pressed)
 	_refresh_audio_icons()
 	
-	
+func _init_sidebar_layout_cache() -> void:
+	sidebar.visible = true
+	sidebar.modulate.a = 0.0
+
+	var vbox := sidebar.get_node("VBoxContainer") as VBoxContainer
+	vbox.queue_sort()
+
+	await get_tree().process_frame
+
+	_cache_sidebar_items()
+
+	_prepare_sidebar_closed_state()
+
+	sidebar.modulate.a = 1.0
+
 func _check_game_finished():
 	var is_finished = (Global.current_level >= MAX_CHAPTERS)
 	
 	play_button.visible = !is_finished
 	if refresh_button:
 		refresh_button.visible = is_finished
+		
+	_restart_play_hint_if_needed()
 		
 func _on_refresh_button_pressed():
 	Global.reset_full_game()
@@ -154,6 +185,7 @@ func update_map_with_fade() -> void:
 	tween.parallel().tween_property(old_map, "modulate:a", 0.0, 0.5)
 
 	last_level = new_level
+	_restart_play_hint_if_needed()
 	
 func _hide_all_city_labels() -> void:
 	for lbl in all_city_labels:
@@ -186,7 +218,11 @@ func _on_city_button_pressed(city: String) -> void:
 			constanta_label.visible = true
 
 func _on_menu_button_pressed() -> void:
-	sidebar.visible = not sidebar.visible
+	if sidebar.visible:
+		_animate_sidebar_close()
+	else:
+		_animate_sidebar_open()
+
 	
 func _on_expert_bttn_pressed() -> void:
 	Transition.fade_to_scene(APE_SCENE_PATH)
@@ -205,4 +241,123 @@ func _on_puzzle_button_pressed() -> void:
 
 func _on_info_button_pressed() -> void:
 	Transition.fade_to_scene("res://scenes/StatsPage.tscn")
+
+func _restart_play_hint_if_needed() -> void:
+	if not is_instance_valid(play_button):
+		return
+
+	if not play_button.visible:
+		_stop_play_hint()
+		return
+
+	_start_play_hint()
+
+
+func _start_play_hint() -> void:
+	_stop_play_hint()
+
+	var base_pos := play_button.position
+
+	_play_hint_tween = create_tween()
+	_play_hint_tween.set_loops()
+	_play_hint_tween.set_trans(Tween.TRANS_SINE)
+	_play_hint_tween.set_ease(Tween.EASE_IN_OUT)
+
+	_play_hint_tween.tween_property(play_button, "position:y", base_pos.y - 6, 0.4)
+	_play_hint_tween.tween_property(play_button, "position:y", base_pos.y, 0.4)
+
+	_play_hint_tween.parallel().tween_property(play_button, "modulate:a", 0.65, 0.4)
+	_play_hint_tween.tween_property(play_button, "modulate:a", 1.0, 0.4)
+
+
+
+func _stop_play_hint() -> void:
+	if _play_hint_tween and is_instance_valid(_play_hint_tween):
+		_play_hint_tween.kill()
+	_play_hint_tween = null
+
+	if is_instance_valid(play_button):
+		play_button.modulate.a = 1.0
+
+
+func _on_play_mouse_entered() -> void:
+	_stop_play_hint()
+
+func _on_play_mouse_exited() -> void:
+	_restart_play_hint_if_needed()
+	
+func _cache_sidebar_items() -> void:
+	_sidebar_items.clear()
+	_sidebar_item_base_pos.clear()
+
+	var vbox := sidebar.get_node("VBoxContainer") as VBoxContainer
+
+	for n: Node in vbox.get_children():
+		var c := n as Control
+		if c == null:
+			continue
+
+		_sidebar_items.append(c)
+		_sidebar_item_base_pos[c] = c.position
+			
+func _prepare_sidebar_closed_state() -> void:
+	sidebar.visible = false
+
+	for item in _sidebar_items:
+		if not is_instance_valid(item): 
+			continue
+		item.position = _sidebar_item_base_pos[item] + Vector2(-SIDEBAR_ITEM_SLIDE, 0.0)
+		item.modulate.a = 0.0
+		
+func _animate_sidebar_open() -> void:
+	_kill_sidebar_tween()
+
+	sidebar.visible = true
+
+	_sidebar_tween = create_tween()
+	_sidebar_tween.set_trans(Tween.TRANS_SINE)
+	_sidebar_tween.set_ease(Tween.EASE_OUT)
+
+	for i in range(_sidebar_items.size()):
+		var item := _sidebar_items[i]
+		if not is_instance_valid(item):
+			continue
+
+		item.position = _sidebar_item_base_pos[item] + Vector2(-SIDEBAR_ITEM_SLIDE, 0)
+		item.modulate.a = 0.0
+
+		var delay := i * SIDEBAR_ITEM_STAGGER
+		_sidebar_tween.parallel().tween_property(item, "position", _sidebar_item_base_pos[item], SIDEBAR_ITEM_DURATION).set_delay(delay)
+		_sidebar_tween.parallel().tween_property(item, "modulate:a", 1.0, SIDEBAR_ITEM_DURATION).set_delay(delay)
+
+
+func _animate_sidebar_close() -> void:
+	_kill_sidebar_tween()
+
+	_sidebar_tween = create_tween()
+	_sidebar_tween.set_trans(Tween.TRANS_SINE)
+	_sidebar_tween.set_ease(Tween.EASE_IN)
+
+	for j in range(_sidebar_items.size()):
+		var i := _sidebar_items.size() - 1 - j
+		var item := _sidebar_items[i]
+		if not is_instance_valid(item):
+			continue
+
+		var delay := j * SIDEBAR_ITEM_STAGGER
+		var target_pos: Vector2 = _sidebar_item_base_pos[item] + Vector2(-SIDEBAR_ITEM_SLIDE, 0.0)
+
+		_sidebar_tween.parallel().tween_property(item, "position", target_pos, SIDEBAR_ITEM_DURATION).set_delay(delay)
+		_sidebar_tween.parallel().tween_property(item, "modulate:a", 0.0, SIDEBAR_ITEM_DURATION).set_delay(delay)
+
+	var total_time := (_sidebar_items.size() - 1) * SIDEBAR_ITEM_STAGGER + SIDEBAR_ITEM_DURATION
+	_sidebar_tween.tween_callback(func(): sidebar.visible = false).set_delay(total_time)
+
+
+func _kill_sidebar_tween() -> void:
+	if _sidebar_tween and is_instance_valid(_sidebar_tween):
+		_sidebar_tween.kill()
+	_sidebar_tween = null
+
+
 	
