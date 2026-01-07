@@ -107,3 +107,15 @@ func clear_save() -> void:
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		save_game()
+	
+	# Android back button 
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		save_game()
+		
+	# App in background
+	if what == NOTIFICATION_APPLICATION_PAUSED:
+		save_game()
+		
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		save_game()
+	
