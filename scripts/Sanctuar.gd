@@ -1,7 +1,9 @@
 extends Node2D
 
 @onready var background_sprite: Sprite2D = $Sprite2D
-# dacă ai alt nume la nodul de fundal, schimbă aici
+const SAVE_PATH := "user://sanctuar_positions.cfg" 
+const BG_KEY := "bg_index"
+
 
 var backgrounds := {
 	0: preload("res://assets/Sanctuar.png"),
@@ -14,12 +16,13 @@ var backgrounds := {
 var current_bg_index: int = 0
 
 func _ready() -> void:
-	_update_animals_visibility()   # la fel ca înainte
-	_set_background()              # în plus, setăm și primul fundal
+	_update_animals_visibility()
+	_load_background_index()
+	_set_background()
+		  
 
 func _update_animals_visibility() -> void:
 	var current_level = Global.current_level
-	#var completed = Global.completed_levels
 
 	for child in get_children():
 		if child.has_method("update_visibility_by_level"):
@@ -30,9 +33,27 @@ func _set_background() -> void:
 		background_sprite.texture = backgrounds[current_bg_index]
 
 func _on_ChangeBgButton_pressed() -> void:
-	# sau _on_Button_pressed, depinde cum se numește nodul tău
 	current_bg_index = (current_bg_index + 1) % backgrounds.size()
 	_set_background()
+	_save_background_index()
 
 func _on_HomeButton_pressed():
 	Transition.fade_to_scene("res://scenes/harta.tscn")
+	
+func _load_background_index() -> void:
+	var config := ConfigFile.new()
+	var err := config.load(SAVE_PATH)
+	if err != OK:
+		return
+
+	if config.has_section_key("sanctuar", BG_KEY):
+		current_bg_index = int(config.get_value("sanctuar", BG_KEY))
+
+func _save_background_index() -> void:
+	var config := ConfigFile.new()
+	var err := config.load(SAVE_PATH)
+	if err != OK:
+		pass
+
+	config.set_value("sanctuar", BG_KEY, current_bg_index)
+	config.save(SAVE_PATH)

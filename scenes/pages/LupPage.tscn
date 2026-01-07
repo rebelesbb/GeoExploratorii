@@ -10,6 +10,7 @@
 script = ExtResource("1_fjl2q")
 animal_name = "lupul"
 unlock_level = 4
+animal_id = "lup"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(639.5, 400)
@@ -17,13 +18,13 @@ scale = Vector2(0.8339844, 0.77734375)
 texture = ExtResource("2_bkn2r")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 196.0
-offset_top = 365.0
-offset_right = 616.0
-offset_bottom = 468.0
+offset_left = 159.0
+offset_top = 370.0
+offset_right = 579.0
+offset_bottom = 473.0
 theme_override_font_sizes/font_size = 36
 text = "Felicitari! 
-Lupul a fost invins!"
+lupul este acum in sanctuar!"
 horizontal_alignment = 1
 
 [node name="Animal" parent="." instance=ExtResource("3_fjl2q")]
@@ -32,10 +33,10 @@ size = 0.7
 use_saved_position = false
 
 [node name="Button" type="Button" parent="."]
-offset_left = 220.00002
-offset_top = 539.0
-offset_right = 2700.0
-offset_bottom = 1141.0
+offset_left = 192.0
+offset_top = 619.0
+offset_right = 2672.0
+offset_bottom = 1221.0
 scale = Vector2(0.15, 0.15)
 icon = ExtResource("4_48qil")
 flat = true
@@ -48,6 +49,12 @@ offset_bottom = 142.0
 icon = ExtResource("5_bkn2r")
 flat = true
 expand_icon = true
+
+[node name="NameInput" type="LineEdit" parent="."]
+offset_left = 205.0
+offset_top = 496.0
+offset_right = 535.0
+offset_bottom = 556.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="HomeButton" to="." method="_on_HomeButton_pressed"]

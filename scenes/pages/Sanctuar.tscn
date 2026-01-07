@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cngti2n2tvtot"]
 
 [ext_resource type="Texture2D" uid="uid://6kk287a4846e" path="res://assets/Sanctuar.png" id="1_5uv5j"]
-[ext_resource type="Script" path="res://scripts/Sanctuar.gd" id="1_bgujd"]
+[ext_resource type="Script" uid="uid://cba1pxwnaluua" path="res://scripts/Sanctuar.gd" id="1_bgujd"]
 [ext_resource type="PackedScene" uid="uid://r784waivigg1" path="res://scenes/animals/Caprioara.tscn" id="2_pm4g2"]
 [ext_resource type="PackedScene" uid="uid://bqaexj33unqtw" path="res://scenes/animals/Urs.tscn" id="3_7bvye"]
 [ext_resource type="PackedScene" uid="uid://gop1g1u7t3wm" path="res://scenes/animals/Lup.tscn" id="4_fqpbo"]

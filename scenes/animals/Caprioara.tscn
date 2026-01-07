@@ -9,6 +9,6 @@ script = ExtResource("2_mflv6")
 animal_id = "caprioara"
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(655, 381.99997)
+position = Vector2(637, 348)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_rxs1y")
