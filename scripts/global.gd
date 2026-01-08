@@ -2,7 +2,9 @@ extends Node
 
 var sanctuary_level: int = 7
 var player_name = ""
-var current_level: int = 0
+var current_level: int = 5
+var puzzle_level: int = 0
+var animal_flag: bool = true
 var max_level_unlocked: int = 0  
 var completed_levels: Array = []
 var should_animate: bool = false

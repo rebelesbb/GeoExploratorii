@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cw6iyrw40ac0s"]
+[gd_scene load_steps=5 format=3 uid="uid://cw6iyrw40ac0s"]
 
 [ext_resource type="Script" uid="uid://bvcvs6udx8vaq" path="res://scripts/puzzle_piece_page.gd" id="1_qkne7"]
+[ext_resource type="Texture2D" uid="uid://cbvq1kxfw7oiq" path="res://assets/puzzle_pieces/Cap2/2.3.png" id="2_p43rg"]
 [ext_resource type="Texture2D" uid="uid://dfyifcxs82trm" path="res://assets/continue_button.png" id="2_qkne7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3iioe"]
+bg_color = Color(0, 0, 0, 0.32941177)
 
 [node name="PuzzlePiecePage" type="CanvasLayer"]
 follow_viewport_enabled = true
@@ -13,7 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.10980392, 0.23137255, 0.38039216, 1)
+color = Color(0.88235295, 0.74509805, 0.90588236, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
@@ -23,34 +27,36 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(900, 650)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3iioe")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
 layout_mode = 2
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="CongratsLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 37
-text = "Ai primit o nouă piesă din puzzle!"
+text = "
+Ai primit o nouă piesă din puzzle!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PuzzlePieceImage" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 325)
 layout_mode = 2
+texture = ExtResource("2_p43rg")
 stretch_mode = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+[node name="NextQuestionButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 150)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-
-[node name="NextQuestionButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/PanelContainer"]
-custom_minimum_size = Vector2(300, 80)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
 action_mode = 0
 icon = ExtResource("2_qkne7")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/PanelContainer/NextQuestionButton" to="." method="_on_next_question_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/NextQuestionButton" to="." method="_on_next_question_button_pressed"]

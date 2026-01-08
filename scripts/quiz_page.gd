@@ -280,6 +280,8 @@ func _end_level_check():
 		Global.completed_levels.append(current_chapter_id)
 
 	# Întotdeauna mergi la puzzle
+	Global.puzzle_level = Global.current_level
+	Global.animal_flag = true
 	Transition.fade_to_scene("res://scenes/puzzle/PuzzlePage.tscn")
 
 func _background_single():

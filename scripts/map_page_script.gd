@@ -51,7 +51,7 @@ const MAX_CHAPTERS = 7
 
 const QUIZ_SCENE_PATH := "res://scenes/QuizPage.tscn"
 const SANCTUAR_SCENE_PATH := "res://scenes/pages/Sanctuar.tscn"
-const PUZZLE_SCENE_PATH := "res://scenes/Puzzle.tscn"
+const PUZZLE_SCENE_PATH := "res://scenes/puzzle_history/PuzzleHistory.tscn"
 const INFO_SCENE_PATH := "res://scenes/Info.tscn"
 const APE_SCENE_PATH := "res://scenes/ApeRelief.tscn"
 

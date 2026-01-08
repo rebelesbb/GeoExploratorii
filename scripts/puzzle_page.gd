@@ -8,6 +8,9 @@ extends Control
 const PIECE_SIZE = Vector2(280, 280)
 const SNAP_DISTANCE = 20.0           # distanta pentru unire
 const NEXT_SCENE_PATH = "res://scenes/harta.tscn"
+const PUZZLE_HISTORY_SCENE_PATH = "res://scenes/puzzle_history/PuzzleHistory.tscn"
+var CHAPTER_ID = Global.puzzle_level
+
 
 # harta conexiuni piese
 const CONNECTION_MAP = {
@@ -36,12 +39,10 @@ func _initialize_pieces():
 	var margin_x = PIECE_SIZE.x + 20
 	var margin_y = PIECE_SIZE.y + 20
 	
-	var chapter_id = Global.current_level 
-	
 	for i in range(pieces.size()):
 		var p = pieces[i]
 		var piece_nr = i + 1 
-		var img_path = "res://assets/puzzle_pieces/Cap%d/%d.%d.png" % [chapter_id, chapter_id, piece_nr]
+		var img_path = "res://assets/puzzle_pieces/Cap%d/%d.%d.png" % [CHAPTER_ID, CHAPTER_ID, piece_nr]
 		var texture = load(img_path)
 		
 		if texture:
@@ -103,10 +104,13 @@ func _on_puzzle_complete():
 	#congrats_layer.visible = true
 	
 	await get_tree().create_timer(2.0).timeout
+	
 	# după puzzle → dă animalul
-	var animal_scene = Global.animal_scenes.get(Global.current_level, "")
-	Transition.fade_to_scene(animal_scene)
-
+	if Global.animal_flag:
+		var animal_scene = Global.animal_scenes.get(Global.current_level, "")
+		Transition.fade_to_scene(animal_scene)
+	else:
+		Transition.fade_to_scene(PUZZLE_HISTORY_SCENE_PATH)
 
 func get_all_pieces_reference():
 	return pieces
