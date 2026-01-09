@@ -72,7 +72,6 @@ func _ready() -> void:
 	call_deferred("_init_sidebar_layout_cache")
 	#_cache_sidebar_items()
 	_prepare_sidebar_closed_state()
-
 	
 	old_map.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	new_map.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -223,12 +222,15 @@ func _on_menu_button_pressed() -> void:
 	else:
 		_animate_sidebar_open()
 
-	
 func _on_expert_bttn_pressed() -> void:
 	Transition.fade_to_scene(APE_SCENE_PATH)
 
 func _on_play_button_pressed() -> void:
+	print("PLAY: before=", Global.current_level, " quiz_state=", Global.quiz_state)
+
 	Global.current_level += 1
+	Global.quiz_state = {"active": false}
+	Global.save_game()
 	print(Global.current_level)
 	Global.should_animate = true
 	Transition.fade_to_scene(QUIZ_SCENE_PATH)
@@ -269,8 +271,6 @@ func _start_play_hint() -> void:
 	_play_hint_tween.parallel().tween_property(play_button, "modulate:a", 0.65, 0.4)
 	_play_hint_tween.tween_property(play_button, "modulate:a", 1.0, 0.4)
 
-
-
 func _stop_play_hint() -> void:
 	if _play_hint_tween and is_instance_valid(_play_hint_tween):
 		_play_hint_tween.kill()
@@ -278,7 +278,6 @@ func _stop_play_hint() -> void:
 
 	if is_instance_valid(play_button):
 		play_button.modulate.a = 1.0
-
 
 func _on_play_mouse_entered() -> void:
 	_stop_play_hint()
@@ -353,11 +352,7 @@ func _animate_sidebar_close() -> void:
 	var total_time := (_sidebar_items.size() - 1) * SIDEBAR_ITEM_STAGGER + SIDEBAR_ITEM_DURATION
 	_sidebar_tween.tween_callback(func(): sidebar.visible = false).set_delay(total_time)
 
-
 func _kill_sidebar_tween() -> void:
 	if _sidebar_tween and is_instance_valid(_sidebar_tween):
 		_sidebar_tween.kill()
 	_sidebar_tween = null
-
-
-	

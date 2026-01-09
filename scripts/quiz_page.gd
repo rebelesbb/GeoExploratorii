@@ -45,7 +45,7 @@ var max_chapters := 7
 
 const QUESTIONS_PER_LEVEL = 6 
 
-var selected_questions : Array
+var selected_questions : Array = []
 var repeat_queue : Array = []
 var current_question_index := 0
 var is_repeating_phase := false
@@ -59,13 +59,9 @@ var style_text := Color("df7c99ff")
 
 func _ready():
 	quiz_data_resource = QuizDataResource.new()
-	current_chapter_id = max(1, Global.current_level)
 	Global.load_game()
-
-	# UI pauză
-	_setup_pause_ui()
-	
 	current_chapter_id = max(1, Global.current_level)
+	_setup_pause_ui()
 
 	var total_questions_in_game = max_chapters * QUESTIONS_PER_LEVEL
 	if total_questions_in_game > 0:
@@ -73,19 +69,24 @@ func _ready():
 
 	print("Valoare per întrebare: ", points_per_question)
 
-	# ✅ dacă există quiz activ salvat, reia exact unde a rămas
-	if Global.quiz_state.get("active", false):
+	var qs := Global.quiz_state
+	var saved_active := bool(qs.get("active", false))
+	var saved_chapter := int(qs.get("chapter_id", -1))
+	
+	if saved_active and saved_chapter == current_chapter_id:
 		_restore_quiz_from_save()
 	else:
+		# dacă era un quiz "agățat" din alt capitol, îl anulăm
+		Global.quiz_state = {"active": false}
 		_start_level(current_chapter_id)
+	
+	print("LOAD: current_level=", Global.current_level, " quiz_state=", Global.quiz_state)
 
 	# salvează că ești în quiz
 	_mark_quiz_active()
 	Global.save_game()
 	
 	print("Valoare per întrebare: ", points_per_question)
-	
-	_start_level(current_chapter_id)
 
 func _start_level(chapter_id: int):
 	selected_questions.clear()
@@ -122,8 +123,16 @@ func _load_question(index: int):
 		var title = quiz_data_resource.chapter_titles.get(current_chapter_id, "Capitol " + str(current_chapter_id))
 		label_level_title.text = "%s\nÎntrebarea %d din %d" % [title, index + 1, selected_questions.size()]
 	else:
-		current_question_data = repeat_queue[0]
-		label_level_title.text = "Recapitulare greșeli\nRăspunde corect pentru a trece mai departe!"
+		if repeat_queue.is_empty():
+			is_repeating_phase = false
+			index = clamp(index, 0, max(0, selected_questions.size() - 1))
+			# acum încarcă normal
+			current_question_data = selected_questions[index]
+			var title = quiz_data_resource.chapter_titles.get(current_chapter_id, "Capitol " + str(current_chapter_id))
+			label_level_title.text = "%s\nÎntrebarea %d din %d" % [title, index + 1, selected_questions.size()]
+		else:
+			current_question_data = repeat_queue[0]
+			label_level_title.text = "Recapitulare greșeli\nRăspunde corect pentru a trece mai departe!"
 
 	var q_id = current_question_data.get("id", "unknown")
 	if not Global.game_stats.history.has(q_id):
@@ -309,6 +318,7 @@ func _end_level_check():
 		Global.completed_levels.append(current_chapter_id)
 
 	_mark_quiz_inactive()
+	Global.quiz_state = {"active": false}
 	Global.save_game()
 	
 	# Întotdeauna mergi la puzzle
@@ -441,6 +451,10 @@ func _restore_quiz_from_save() -> void:
 		_start_level(current_chapter_id)
 		return
 
+	# dacă ai fost salvat în repeating phase dar repeat_queue e gol, ieși din repeating
+	if is_repeating_phase and repeat_queue.is_empty():
+		is_repeating_phase = false
+		
 	# în repeating phase index-ul e ignorat, folosești repeat_queue[0]
 	if is_repeating_phase:
 		_load_question(0)

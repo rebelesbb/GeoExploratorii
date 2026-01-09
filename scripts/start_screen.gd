@@ -43,4 +43,5 @@ func _on_start_pressed():
 	Transition.fade_to_scene("res://scenes/harta.tscn")
 
 func _on_quit_pressed():
+	Global.clear_save()
 	Transition.fade_and_quit()
