@@ -25,7 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.101960786, 0.16862746, 0.29803923, 1)
+color = Color(0.9254902, 0.9372549, 0.94509804, 1)
 
 [node name="PuzzleContainer" type="Control" parent="."]
 layout_mode = 1
@@ -41,7 +41,6 @@ offset_left = 581.0
 offset_top = 97.0
 offset_right = 820.0
 offset_bottom = 456.0
-texture = null
 
 [node name="Piece2" parent="PuzzleContainer" instance=ExtResource("3_5ldw8")]
 layout_mode = 0
@@ -49,7 +48,6 @@ offset_left = 762.0
 offset_top = 103.0
 offset_right = 1106.0
 offset_bottom = 534.0
-texture = null
 
 [node name="Piece3" parent="PuzzleContainer" instance=ExtResource("4_bc2gx")]
 layout_mode = 0
@@ -64,7 +62,6 @@ offset_left = 579.0
 offset_top = 367.0
 offset_right = 867.0
 offset_bottom = 802.0
-texture = null
 
 [node name="Piece5" parent="PuzzleContainer" instance=ExtResource("6_g2ywq")]
 layout_mode = 0
@@ -72,7 +69,6 @@ offset_left = 801.0
 offset_top = 431.0
 offset_right = 1097.0
 offset_bottom = 794.0
-texture = null
 
 [node name="Piece6" parent="PuzzleContainer" instance=ExtResource("7_joo86")]
 layout_mode = 0
@@ -80,7 +76,6 @@ offset_left = 1034.0
 offset_top = 357.0
 offset_right = 1275.0
 offset_bottom = 792.0
-texture = null
 
 [node name="CongratsLayer" type="CanvasLayer" parent="."]
 layer = 10

@@ -322,6 +322,8 @@ func _end_level_check():
 	Global.save_game()
 	
 	# Întotdeauna mergi la puzzle
+	Global.puzzle_level = Global.current_level
+	Global.animal_flag = true
 	Transition.fade_to_scene("res://scenes/puzzle/PuzzlePage.tscn")
 
 func _background_single():
