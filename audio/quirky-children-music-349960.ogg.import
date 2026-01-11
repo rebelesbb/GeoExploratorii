@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/quirky-children-music-349960.ogg-b7ce231e48fb
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

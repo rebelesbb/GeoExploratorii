@@ -4,7 +4,8 @@ extends Node2D
 
 func _ready() -> void:
 	music.volume_db = -25 
-	music.play()
+	if not music.playing:
+		music.play()
 
 func set_enabled(enabled: bool) -> void:
 	var idx := AudioServer.get_bus_index("Music")
