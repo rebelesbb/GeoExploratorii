@@ -4,7 +4,7 @@ const SAVE_PATH := "user://savegame.json"
 
 var sanctuary_level: int = 7
 var player_name = ""
-var current_level: int = 5
+var current_level: int = 0
 var puzzle_level: int = 0
 var animal_flag: bool = true
 var max_level_unlocked: int = 0  

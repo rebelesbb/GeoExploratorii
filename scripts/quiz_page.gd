@@ -370,7 +370,6 @@ func _on_continue_pressed() -> void:
 	_resume_game()
 
 func _on_restart_pressed() -> void:
-	# Restart JOC (cum ai cerut): șterge progres + merge la StartScreen
 	_resume_game()
 	Global.reset_full_game()
 	Transition.fade_to_scene("res://scenes/StartScreen.tscn")

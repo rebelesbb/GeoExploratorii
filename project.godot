@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://scripts/global.gd"
-Transition="*res://scenes/Transition.tscn"
+Transition="*res://scenes/transition.tscn"
 MusicPlayer="*res://scenes/music.tscn"
 Click="*res://scenes/click.tscn"
 

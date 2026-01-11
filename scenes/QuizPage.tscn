@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://4ucuy6wn8gql"]
+[gd_scene load_steps=17 format=3 uid="uid://4ucuy6wn8gql"]
 
 [ext_resource type="Script" uid="uid://cdsr2jsaxr5cf" path="res://scripts/quiz_page.gd" id="1_puuyo"]
 [ext_resource type="Texture2D" uid="uid://ddrw72dfil2n5" path="res://assets/images/answ_bg_red.png" id="2_s03yw"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dx6ew0erlqyjs" path="res://assets/images/answ_bg_blue.png" id="4_1l753"]
 [ext_resource type="Texture2D" uid="uid://c0ll2rvtae6if" path="res://assets/images/answ_bg_yellow.png" id="5_2uaje"]
 [ext_resource type="Texture2D" uid="uid://cbtstov3sa7mh" path="res://assets/images/check_button.png" id="6_5dte4"]
-[ext_resource type="Texture2D" uid="uid://dkqibbyubu75u" path="res://assets/images/close_button.png" id="7_ltliw"]
+[ext_resource type="Texture2D" uid="uid://t1v04a533ojo" path="res://assets/images/pause_button.png" id="7_2uaje"]
+[ext_resource type="Texture2D" uid="uid://cuia0ss0lb0j5" path="res://assets/images/continue_button.png" id="8_5dte4"]
+[ext_resource type="Texture2D" uid="uid://cw02we6h0hgxd" path="res://assets/images/restart_button.png" id="9_estm6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s03yw"]
 
@@ -280,7 +282,7 @@ layout_mode = 2
 layout_mode = 0
 offset_right = 98.0
 offset_bottom = 93.0
-icon = ExtResource("7_ltliw")
+icon = ExtResource("7_2uaje")
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -319,11 +321,11 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_irwnl")
 
 [node name="ContinueButton" type="Button" parent="PauseOverlay/Panel"]
 layout_mode = 0
-offset_left = -130.0
-offset_top = -103.0
-offset_right = 155.0
-offset_bottom = -6.0
-icon = ExtResource("4_1l753")
+offset_left = -128.0
+offset_top = -109.0
+offset_right = 157.0
+offset_bottom = -12.0
+icon = ExtResource("8_5dte4")
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -331,10 +333,10 @@ expand_icon = true
 [node name="RestartButton" type="Button" parent="PauseOverlay/Panel"]
 layout_mode = 0
 offset_left = -160.0
-offset_top = 47.0
-offset_right = 187.0
-offset_bottom = 136.0
-icon = ExtResource("2_s03yw")
+offset_top = 17.0
+offset_right = 182.0
+offset_bottom = 99.0
+icon = ExtResource("9_estm6")
 flat = true
 icon_alignment = 1
 expand_icon = true
