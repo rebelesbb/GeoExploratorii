@@ -4,7 +4,7 @@ const SAVE_PATH := "user://savegame.json"
 
 var sanctuary_level: int = 7
 var player_name = ""
-var current_level: int = 0
+var current_level: int = 6
 var puzzle_level: int = 0
 var animal_flag: bool = true
 var max_level_unlocked: int = 0  
@@ -113,6 +113,8 @@ func _notification(what):
 	# Android back button 
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
 		save_game()
+		get_tree().root.set_input_as_handled()
+		return
 		
 	# App in background
 	if what == NOTIFICATION_APPLICATION_PAUSED:

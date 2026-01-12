@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rn3avlj3e7l1"
-path="res://.godot/imported/harta_vecini.png-8498c744134572252f89f423525bcd60.ctex"
+uid="uid://3uk8xa58hhbg"
+path="res://.godot/imported/story.png-b5c895f0e52e314b8f70ddfcf8cffdd1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/maps/harta_vecini.png"
-dest_files=["res://.godot/imported/harta_vecini.png-8498c744134572252f89f423525bcd60.ctex"]
+source_file="res://assets/images/story.png"
+dest_files=["res://.godot/imported/story.png-b5c895f0e52e314b8f70ddfcf8cffdd1.ctex"]
 
 [params]
 

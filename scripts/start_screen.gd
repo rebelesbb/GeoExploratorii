@@ -40,7 +40,7 @@ func _on_start_pressed():
 		return
 
 	Global.player_name = player_name
-	Transition.fade_to_scene("res://scenes/harta.tscn")
+	Transition.fade_to_scene("res://scenes/StoryScreen.tscn")
 
 func _on_quit_pressed():
 	Global.clear_save()

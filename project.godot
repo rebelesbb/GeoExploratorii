@@ -12,8 +12,9 @@ config_version=5
 
 config/name="GeoExploratorii"
 run/main_scene="uid://0r8xgwpxjtsf"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://5widugxr00xp"
 
 [autoload]
 
