@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwo5aejysftuu"]
+
+[ext_resource type="Script" uid="uid://dmceksh1wbq02" path="res://scripts/AnimalPage.gd" id="1_jxoym"]
+[ext_resource type="Texture2D" uid="uid://6kk287a4846e" path="res://assets/Sanctuar.png" id="2_l8umm"]
+[ext_resource type="PackedScene" uid="uid://c44455nki6aqd" path="res://scenes/animals/Capibara.tscn" id="3_jxoym"]
+[ext_resource type="Texture2D" uid="uid://pf8njyrywjul" path="res://assets/sanctuarButton.png" id="4_llk0x"]
+[ext_resource type="Texture2D" uid="uid://c8acjjul474lb" path="res://assets/home_page_button.png" id="5_l8umm"]
+
+[node name="CapibaraPage" type="Node2D"]
+script = ExtResource("1_jxoym")
+animal_name = "capibara"
+unlock_level = 7
+animal_id = "capibara"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(639.5, 400)
+scale = Vector2(0.8339844, 0.77734375)
+texture = ExtResource("2_l8umm")
+
+[node name="Animal" parent="." instance=ExtResource("3_jxoym")]
+position = Vector2(289, 188)
+size = 0.7
+use_saved_position = false
+
+[node name="Label" type="Label" parent="."]
+offset_left = 114.0
+offset_top = 347.0
+offset_right = 565.0
+offset_bottom = 450.0
+theme_override_font_sizes/font_size = 36
+text = "Felicitari! 
+capibara este acum in sanctuar"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+offset_left = 188.0
+offset_top = 588.0
+offset_right = 2668.0
+offset_bottom = 1190.0
+scale = Vector2(0.15, 0.15)
+icon = ExtResource("4_llk0x")
+flat = true
+
+[node name="HomeButton" type="Button" parent="."]
+offset_left = 28.0
+offset_top = 25.0
+offset_right = 139.0
+offset_bottom = 142.0
+icon = ExtResource("5_l8umm")
+flat = true
+expand_icon = true
+
+[node name="NameInput" type="LineEdit" parent="."]
+offset_left = 205.0
+offset_top = 496.0
+offset_right = 535.0
+offset_bottom = 556.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HomeButton" to="." method="_on_HomeButton_pressed"]

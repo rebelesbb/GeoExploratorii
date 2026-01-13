@@ -1,0 +1,11 @@
+[gd_scene load_steps=0 format=3 uid="uid://cujhd8q8lajea"]
+
+[node name="Test" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0

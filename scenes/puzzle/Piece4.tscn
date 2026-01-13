@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyyfrd7iecgqs"]
+
+[ext_resource type="PackedScene" uid="uid://ck05ca8vwqnta" path="res://scenes/puzzle/Piece.tscn" id="1_e7io4"]
+
+[node name="Piece" instance=ExtResource("1_e7io4")]
